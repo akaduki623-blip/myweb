@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>王瑞勇 - 个人作品集</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        // 图片懒加载实现
+        document.addEventListener('DOMContentLoaded', function() {
+            let lazyImages = [].slice.call(document.querySelectorAll('img.lazy'));
+            
+            // 图片加载完成后添加loaded类
+            function addLoadedClass(img) {
+                img.addEventListener('load', function() {
+                    img.classList.add('loaded');
+                });
+                // 如果图片已经加载完成（从缓存）
+                if (img.complete) {
+                    img.classList.add('loaded');
+                }
+            }
+            
+            if ('IntersectionObserver' in window) {
+                let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            let lazyImage = entry.target;
+                            lazyImage.src = lazyImage.dataset.src;
+                            lazyImage.srcset = lazyImage.dataset.srcset || '';
+                            addLoadedClass(lazyImage);
+                            lazyImage.classList.remove('lazy');
+                            lazyImageObserver.unobserve(lazyImage);
+                        }
+                    });
+                });
+                
+                lazyImages.forEach(function(lazyImage) {
+                    lazyImageObserver.observe(lazyImage);
+                });
+            } else {
+                // Fallback for browsers that don't support IntersectionObserver
+                let lazyLoadThrottleTimeout;
+                
+                function lazyLoad() {
+                    if (lazyLoadThrottleTimeout) {
+                        clearTimeout(lazyLoadThrottleTimeout);
+                    }
+                    
+                    lazyLoadThrottleTimeout = setTimeout(function() {
+                        let scrollTop = window.pageYOffset;
+                        lazyImages.forEach(function(img) {
+                            if (img.offsetTop < (window.innerHeight + scrollTop)) {
+                                img.src = img.dataset.src;
+                                img.srcset = img.dataset.srcset || '';
+                                addLoadedClass(img);
+                                img.classList.remove('lazy');
+                            }
+                        });
+                        if (lazyImages.length === 0) {
+                            document.removeEventListener('scroll', lazyLoad);
+                            window.removeEventListener('resize', lazyLoad);
+                            window.removeEventListener('orientationChange', lazyLoad);
+                        }
+                    }, 20);
+                }
+                
+                document.addEventListener('scroll', lazyLoad);
+                window.addEventListener('resize', lazyLoad);
+                window.addEventListener('orientationChange', lazyLoad);
+                
+                lazyLoad();
+            }
+        });
+    </script>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">
+                <h1>王瑞勇</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home" class="nav-link active">首页</a></li>
+                <li><a href="#works" class="nav-link">作品展示</a></li>
+                <li><a href="#social" class="nav-link">社交平台</a></li>
+                <li><a href="#resume" class="nav-link">个人履历</a></li>
+                <li><a href="#resume" class="nav-link">联系我</a></li>
+            </ul>
+            <div class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 首页 -->
+    <section id="home" class="home section">
+        <div class="container">
+            <div class="home-content">
+                <div class="banner">
+                    <div class="banner-text">
+                        <h2>强自驱力的</h2>
+                        <h3>海陆空多栖创作者</h3>
+                        <p class="subtitle">一个人能够走得更快，但一群人能够走得更远。</p>
+                    </div>
+                    <div class="banner-image">
+                            <img class="lazy profile-img" data-src="images/profile.jpg" alt="王瑞勇">
+                        </div>
+                </div>
+                <div class="tags">
+                    <span class="tag">前端编程开发</span>
+                    <span class="tag">AI漫剧创作</span>
+                    <span class="tag">视频内容匠人</span>
+                    <span class="tag">跨境电商主理人</span>
+                    <span class="tag">新媒体运营</span>
+                    <span class="tag">AIGC全栈探索者</span>
+                    <span class="tag">自学深耕者</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 作品展区 -->
+    <section id="works" class="works section">
+        <div class="container">
+            <h2 class="section-title">作品展示</h2>
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="video">AIGC 视频 (AI Motion)</button>
+                <button class="filter-btn" data-filter="code">编程与开发 (Code & Dev)</button>
+                <button class="filter-btn" data-filter="visual">商业视觉 (Visuals & UI)</button>
+                <button class="filter-btn" data-filter="case">公众号文章 (Gongzhonghao)</button>
+            </div>
+            <div class="works-grid">
+                <!-- 视频作品1 -->
+                <div class="work-item" data-category="video">
+                    <div class="work-card">
+                        <div class="work-cover">
+                            <img class="lazy" data-src="images/work1.jpg" alt="AI广告宣传作品">
+                            <div class="work-overlay">
+                                <a href="https://www.xiaohongshu.com/discovery/item/6937d432000000000d038dbd?source=webshare&xhsshare=pc_web&xsec_token=ABctCHE19xr1BsuiKGqjsjTdxYALhGAX5kmdLxOEh0goA=&xsec_source=pc_share">
+                                <button class="view-btn">查看详情</button>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="work-info">
+                            <h3>AI广告宣传片 - “满井坡”矿泉水广告商单</h3>
+                            <p class="work-category">视频作品</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- 视频作品2 -->
+                <div class="work-item" data-category="video">
+                    <div class="work-card">
+                        <div class="work-cover">
+                            <img class="lazy" data-src="images/work3.jpg" alt="原创歌曲">
+                            <div class="work-overlay">
+                                <a href="http://xhslink.com/o/69Ojfr4lY0z ">
+                                <button class="view-btn">查看详情</button>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="work-info">
+                            <h3>原创歌曲《来雄安吧，追梦的“傻子们”》</h3>
+                            <p class="work-category">视频作品</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- 视频作品3 -->
+                <div class="work-item" data-category="video">
+                    <div class="work-card">
+                        <div class="work-cover">
+                            <img class="lazy" data-src="images/work5.jpg" alt="AI动画短片">
+                            <div class="work-overlay">
+                                <a href="http://xhslink.com/o/AuevZLqzwN6">
+                                <button class="view-btn">查看详情</button>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="work-info">
+                            <h3>AI广告商单- 保时捷911</h3>
+                            <p class="work-category">视频作品</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- 视频作品4 -->
+                <div class="work-item" data-category="video">
+                    <div class="work-card">
+                        <div class="work-cover">
+                            <img class="lazy" data-src="images/work6.jpg" alt="广告商单">
+                            <div class="work-overlay">                                  
+                                <a href="http://xhslink.com/o/7mBOsWmLr6e ">
+                                <button class="view-btn">查看详情</button>
+                                </a>                               
+                            </div>
+                        </div>
+                        <div class="work-info">
+                            <h3>“水韵太极酒”广告</h3>
+                            <p class="work-category">视频作品</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- 视频作品5 -->
+                <div class="work-item" data-category="video">
+                    <div class="work-card">
+                        <div class="work-cover">
+                            <img class="lazy" data-src="images/work7.jpg" alt="Etsy跨境电商教程">
+                            <div class="work-overlay">
+                                <a href="http://xhslink.com/o/2zw4YQRALqe">
+                                <button class="view-btn">查看详情</button>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="work-info">
+                            <h3>Etsy跨境电商教程</h3>
+                            <p class="work-category">视频作品</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- 视频作品6 -->
+                <div class="work-item" data-category="video">
+                    <div class="work-card">
+                        <div class="work-cover">
+                            <img class="lazy" data-src="images/work21.jpg" alt="陆游诞辰900周年视频大赛作品">
+                            <div class="work-overlay">
+                                <a href="https://www.xiaohongshu.com/discovery/item/691b294e000000000d00db28?source=webshare&xhsshare=pc_web&xsec_token=ABLRTjArIqEg_sj-AS1lGaKa1O07Gj57VHSCITcdFnlQk=&xsec_source=pc_share">
+                                <button class="view-btn">查看详情</button>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="work-info">
+                            <h3>陆游诞辰900周年视频大赛作品</h3>
+                            <p class="work-category">视频作品</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- 编程开发作品1 -->
+                <div class="work-item" data-category="code">
+                    <div class="work-card">
+                        <div class="work-cover">
+                            <img class="lazy" data-src="images/work4.jpg" alt="Sora2分镜提示词工具">
+                            <div class="work-overlay">
+                                <button class="view-btn">查看详情</button>
+                            </div>
+                        </div>
+                        <div class="work-info">
+                            <h3>Sora2分镜提示词工具</h3>
+                            <p class="work-category">编程开发</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- 编程开发作品2 -->
+                <div class="work-item" data-category="code">
+                    <div class="work-card">
+                        <div class="work-cover">
+                            <img class="lazy" data-src="images/work9.jpg" alt="爆款公众号文案生成器">
+                            <div class="work-overlay">
+                                <button class="view-btn">查看详情</button>
+                            </div>
+                        </div>
+                        <div class="work-info">
+                            <h3>爆款公众号文案生成器</h3>
+                            <p class="work-category">编程开发</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- 编程开发作品3 -->
+                <div class="work-item" data-category="code">
+                    <div class="work-card">
+                        <div class="work-cover">
+                            <img class="lazy" data-src="images/work10.jpg" alt="移动应用UI设计">
+                            <div class="work-overlay">
+                                <button class="view-btn">查看详情</button>
+                            </div>
+                        </div>
+                        <div class="work-info">
+                            <h3>移动应用UI设计</h3>
+                            <p class="work-category">编程开发</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- 编程开发作品4 -->
+                <div class="work-item" data-category="code">
+                    <div class="work-card">
+                        <div class="work-cover">
+                            <img class="lazy" data-src="images/work11.jpg" alt="AI主题海报设计">
+                            <div class="work-overlay">
+                                <button class="view-btn">查看详情</button>
+                            </div>
+                        </div>
+                        <div class="work-info">
+                            <h3>AI主题海报设计</h3>
+                            <p class="work-category">编程开发</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- 编程开发作品5 -->
+                <div class="work-item" data-category="code">
+                    <div class="work-card">
+                        <div class="work-cover">
+                            <img class="lazy" data-src="images/work12.jpg" alt="产品包装设计方案">
+                            <div class="work-overlay">
+                                <button class="view-btn">查看详情</button>
+                            </div>
+                        </div>
+                        <div class="work-info">
+                            <h3>产品包装设计方案</h3>
+                            <p class="work-category">编程开发</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- 编程开发作品6 -->
+                <div class="work-item" data-category="code">
+                    <div class="work-card">
+                        <div class="work-cover">
+                            <img class="lazy" data-src="images/work13.jpg" alt="科幻主题插画设计">
+                            <div class="work-overlay">
+                                <button class="view-btn">查看详情</button>
+                            </div>
+                        </div>
+                        <div class="work-info">
+                            <h3>科幻主题插画设计</h3>
+                            <p class="work-category">编程开发</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- 商业视觉作品1 -->
+                <div class="work-item" data-category="visual">
+                    <div class="work-card">
+                        <div class="work-cover">
+                            <img class="lazy" data-src="images/work16.jpg" alt="品牌视觉识别系统">
+                            <div class="work-overlay">
+                                <button class="view-btn">查看详情</button>
+                            </div>
+                        </div>
+                        <div class="work-info">
+                            <h3>品牌视觉识别系统</h3>
+                            <p class="work-category">商业视觉</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- 商业视觉作品2 -->
+                <div class="work-item" data-category="visual">
+                    <div class="work-card">
+                        <div class="work-cover">
+                            <img class="lazy" data-src="images/work17.jpg" alt="品牌视觉识别系统">
+                            <div class="work-overlay">
+                                <button class="view-btn">查看详情</button>
+                            </div>
+                        </div>
+                        <div class="work-info">
+                            <h3>品牌视觉识别系统</h3>
+                            <p class="work-category">商业视觉</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- 商业视觉作品3 -->
+                <div class="work-item" data-category="visual">
+                    <div class="work-card">
+                        <div class="work-cover">
+                            <img class="lazy" data-src="images/work18.jpg" alt="品牌视觉识别系统">
+                            <div class="work-overlay">
+                                <button class="view-btn">查看详情</button>
+                            </div>
+                        </div>
+                        <div class="work-info">
+                            <h3>品牌视觉识别系统</h3>
+                            <p class="work-category">商业视觉</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- 商业视觉作品4 -->
+                <div class="work-item" data-category="visual">
+                    <div class="work-card">
+                        <div class="work-cover">
+                            <img class="lazy" data-src="images/work19.jpg" alt="上海旅游景点">
+                            <div class="work-overlay">
+                                <button class="view-btn">查看详情</button>
+                            </div>
+                        </div>
+                        <div class="work-info">
+                            <h3>上海旅游景点</h3>
+                            <p class="work-category">商业视觉</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- 商业视觉作品5 -->
+                <div class="work-item" data-category="visual">
+                    <div class="work-card">
+                        <div class="work-cover">
+                            <img class="lazy" data-src="images/work20.jpg" alt="UI设计">
+                            <div class="work-overlay">
+                                <button class="view-btn">查看详情</button>
+                            </div>
+                        </div>
+                        <div class="work-info">
+                            <h3>UI设计</h3>
+                            <p class="work-category">商业视觉</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- 商业视觉作品6 -->
+                <div class="work-item" data-category="visual">
+                    <div class="work-card">
+                        <div class="work-cover">
+                            <img class="lazy" data-src="images/work2.jpg" alt="从0开始认识AI">
+                            <div class="work-overlay">
+                                <a href="https://docs.qq.com/pdf/DZEtrbFRUTmx4VUZN">
+                                <button class="view-btn">查看详情</button>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="work-info">
+                            <h3>从0开始认识AI</h3>
+                            <p class="work-category">商业视觉</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- 公众号文章1 -->
+<div class="work-item" data-category="case">
+  <div class="work-card">
+    <div class="work-cover">
+      <img class="lazy" data-src="images/work10.jpg" alt="800+Nano Banana Pro提示词">
+      <div class="work-overlay">
+        <!-- 新增a标签包裹按钮，href填你的作品网址 -->
+        <a href="https://mp.weixin.qq.com/s/xytgDY1o6FWXBB2BzywBaQ" target="_blank">
+          <button class="view-btn">查看详情</button>
+        </a>
+      </div>
+    </div>
+    <div class="work-info">
+      <h3>800+Nano Banana Pro提示词</h3>
+      <p class="work-category">公众号文章</p>
+    </div>
+  </div>
+</div>
+                <!-- 公众号文章2 -->
+<div class="work-item" data-category="case">
+  <div class="work-card">
+    <div class="work-cover">
+      <img class="lazy" data-src="images/work11.jpg" alt="Gemini 3 Pro 发布">
+      <div class="work-overlay">
+        <!-- 新增a标签包裹按钮，href填你的作品网址 -->
+        <a href="https://mp.weixin.qq.com/s/s-D-5CTXg7Oi0f41usVwSw" target="_blank">
+          <button class="view-btn">查看详情</button>
+        </a>
+      </div>
+    </div>
+    <div class="work-info">
+      <h3>Gemini 3 Pro 登场发布</h3>
+      <p class="work-category">公众号新闻</p>
+    </div>
+  </div>
+</div>
+                <!-- 公众号文章3 -->
+                <div class="work-item" data-category="case">
+  <div class="work-card">
+    <div class="work-cover">
+      <img class="lazy" data-src="images/work12.jpg" alt="马斯克1万亿美金不白拿，深夜更新Grok4">
+      <div class="work-overlay">
+        <!-- 新增a标签包裹按钮，href填你的作品网址 -->
+        <a href="https://mp.weixin.qq.com/s/pLeTG9MLhJam_wHB15dGxQ" target="_blank">
+          <button class="view-btn">查看详情</button>
+        </a>
+      </div>
+    </div>
+    <div class="work-info">
+      <h3>马斯克1万亿美金不白拿，深夜更新Grok4</h3>
+      <p class="work-category">公众号新闻</p>
+    </div>
+  </div>
+</div>
+                <!-- 公众号文章4 -->
+                <div class="work-item" data-category="case">
+  <div class="work-card">
+    <div class="work-cover">
+      <img class="lazy" data-src="images/work13.jpg" alt="AI炒股？还真金白银举办的，豆包还遥遥领先？老外太会玩了！">
+      <div class="work-overlay">
+        <!-- 新增a标签包裹按钮，href填你的作品网址 -->
+        <a href="https://mp.weixin.qq.com/s/fLJCXdbuFCpKTpoM2HUc0w" target="_blank">
+          <button class="view-btn">查看详情</button>
+        </a>
+      </div>
+    </div>
+    <div class="work-info">
+      <h3>AI炒股？还真金白银举办的，豆包还遥遥领先？老外太会玩了！</h3>
+      <p class="work-category">公众号新闻</p>
+    </div>
+  </div>
+</div>
+                <!-- 公众号文章5 -->
+                <div class="work-item" data-category="case">
+  <div class="work-card">
+    <div class="work-cover">
+      <img class="lazy" data-src="images/work14.jpg" alt="两分钟生成专属漫画！这个AI神器让不会画画的我也能当漫画家了">
+      <div class="work-overlay">
+        <!-- 新增a标签包裹按钮，href填你的作品网址 -->
+        <a href="https://mp.weixin.qq.com/s/D1TNIh2nGtlZw1BrhYM5zw" target="_blank">
+          <button class="view-btn">查看详情</button>
+        </a>
+      </div>
+    </div>
+    <div class="work-info">
+      <h3>两分钟生成专属漫画！这个AI神器让不会画画的我也能当漫画家了</h3>
+      <p class="work-category">公众号新闻</p>
+    </div>
+  </div>
+</div>
+                <!-- 公众号文章6 -->
+                <div class="work-item" data-category="case">
+  <div class="work-card">
+    <div class="work-cover">
+      <img class="lazy" data-src="images/work15.jpg" alt="重磅！OpenAI发布Sora 2：AI视频生成迎来"ChatGPT时刻"">
+      <div class="work-overlay">
+        <!-- 新增a标签包裹按钮，href填你的作品网址 -->
+        <a href="https://mp.weixin.qq.com/s/B-gkWMzCRLSwXKKD-KbJPQ" target="_blank">
+          <button class="view-btn">查看详情</button>
+        </a>
+      </div>
+    </div>
+    <div class="work-info">
+      <h3>重磅！OpenAI发布Sora 2：AI视频生成迎来"ChatGPT时刻"</h3>
+      <p class="work-category">公众号新闻</p>
+    </div>
+  </div>
+</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 社交聚合页 -->
+    <section id="social" class="social section">
+        <div class="container">
+            <h2 class="section-title">社交平台</h2>
+            <div class="social-grid">
+                <div class="social-card">
+                    <div class="social-icon">
+                        <i class="fab fa-weixin"></i>
+                    </div>
+                    <h3>微信公众号</h3>
+                    <p>AI先锋洞察站</p>
+                    <a href="https://mp.weixin.qq.com/mp/profile_ext?action=home&_biz=MzYyMjQwMzQyNw==&scene=123#wechat_redirect" class="social-link">访问公众号</a>
+                </div>
+                <div class="social-card">
+                    <div class="social-icon">
+                        <i class="fab fa-tiktok"></i>
+                    </div>
+                    <h3>抖音</h3>
+                    <p>AI创意实验室</p>
+                    <a href="#" class="social-link">访问抖音</a>
+                </div>
+                <div class="social-card">
+                    <div class="social-icon">
+                        <!-- 小红书logo -->
+                        <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect width="60" height="60" rx="12" fill="#ff2442" filter="drop-shadow(0 0 10px #ff2442)"/>
+                            <text x="30" y="36" font-size="18" font-weight="bold" fill="white" text-anchor="middle" dominant-baseline="middle" filter="drop-shadow(0 0 5px white)">
+                                小红书
+                            </text>
+                        </svg>
+                    </div>
+                    <h3>小红书</h3>
+                    <p>跨境搞钱主理人</p>
+                    <a href="https://xhslink.com/m/6myWxmVWDr0" class="social-link">访问小红书</a>
+                </div>
+                <div class="social-card">
+                    <div class="social-icon">
+                        <!-- 视频号logo -->
+                        <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="30" cy="22.5" r="15" fill="#FF7D00" filter="drop-shadow(0 0 10px #FF7D00)"/>
+                            <circle cx="30" cy="37.5" r="15" fill="#FF7D00" filter="drop-shadow(0 0 10px #FF7D00)"/>
+                        </svg>
+                    </div>
+                    <h3>视频号</h3>
+                    <p>AI娱乐先锋</p>
+                    <a href="https://weixin.qq.com/sph/At5ovdxEs" class="social-link">访问视频号</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 个人履历页 -->
+    <section id="resume" class="resume section">
+        <div class="container">
+            <h2 class="section-title">个人履历</h2>
+            <div class="resume-content">
+                <div class="resume-left">
+                    <div class="resume-section">
+                        <h3 class="resume-section-title">个人信息</h3>
+                        <div class="resume-item">
+                            <div class="info-item">
+                                <span class="label">姓名：</span>
+                                <span class="value">王瑞勇</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">性别：</span>
+                                <span class="value">男</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">出生年月：</span>
+                                <span class="value">1988.12</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">现住城市：</span>
+                                <span class="value">河北省雄安新区容城县</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">电话：</span>
+                                <span class="value">15133258119</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="label">邮箱：</span>
+                                <span class="value">381444742@qq.com</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="resume-section">
+                        <h3 class="resume-section-title">Tech Stack</h3>
+                        <div class="skills-list">
+                            <div class="skill-item">
+                                <span class="skill-name">ChatGPT</span>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">Gemini 3 Pro</span>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">DeepSeek</span>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">通义千问</span>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">Sora 2</span>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">Seko</span>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">Nano Banana Pro</span>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">LiblibAI</span>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">Lovart</span>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">HeyGen</span>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">Suno</span>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">NotebookLM</span>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">HTML5</span>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">CSS3</span>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">JavaScript</span>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">React</span>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">Python</span>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">TikTok运营</span>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">跨境电商</span>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">视频剪辑</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="resume-section">
+                        <h3 class="resume-section-title">技能证书</h3>
+                        <div class="skills-list">
+                            <div class="skill-item">
+                                <span class="skill-name">二级建造师</span>
+                            </div>
+                            <div class="skill-item">
+                                <span class="skill-name">C1驾驶证</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="resume-section">
+                        <h3 class="resume-section-title">联系我</h3>
+                        <div class="contact-form">
+                            <h3>留言表单</h3>
+                            <form id="contactForm">
+                                <div class="form-group">
+                                    <input type="text" name="name" placeholder="您的姓名" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" name="email" placeholder="您的邮箱" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name="subject" placeholder="留言主题">
+                                </div>
+                                <div class="form-group">
+                                    <textarea name="message" placeholder="您的留言内容" rows="5" required></textarea>
+                                </div>
+                                <button type="submit" class="submit-btn">发送留言</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="resume-right">
+                    <div class="resume-section">
+                        <h3 class="resume-section-title">工作经历</h3>
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-date">2024.03-至今</div>
+                                <div class="timeline-content">
+                                    <h4>AIGC 内容生产与全链路工作流搭建</h4>
+                                    <p class="position">AI内容创作者</p>
+                                    <p><strong>视觉图像算法多模态算法</strong></p>
+                                    <ul class="timeline-list">
+                                        <li>创作带有画面的视频，基于故事进行视觉化呈现，确保内容与故事情节的紧密结合</li>
+                                        <li>制作动态漫画，通过动画技术呈现故事情节，注重角色设计及动作流畅性</li>
+                                        <li>制作科普搞笑视频，结合趣味性与知识性，提升观众的学习体验</li>
+                                        <li>撰写AI公众号文章，解读前沿AI动态</li>
+                                        <li>制作AI广告片，通过数据分析和算法应用，优化视觉效果与信息传播效果</li>
+                                        <li>熟练使用国内外AI平台：</li>
+                                        <li style="list-style-type: none; margin-left: 20px;">01.核心大模型与智能对话: Gemini 3 Pro (Google)、ChatGPT (OpenAI)、DeepSeek (深度求索)、通义千问 (Alibaba)、Manus</li>
+                                        <li style="list-style-type: none; margin-left: 20px;">02.AI视频生成：Sora 2 (OpenAI)、Seko (商汤)、可灵 (快手)、hailuo (海螺AI - MiniMax)、Vidu (生数科技)</li>
+                                        <li style="list-style-type: none; margin-left: 20px;">03.AI绘画与设计：Nano Banana Pro (Google)、LiblibAI (哩布哩布)、Lovart、即梦 (字节跳动/剪映)</li>
+                                        <li style="list-style-type: none; margin-left: 20px;">04.知识库与生产力工具：NotebookLM (Google)</li>
+                                        <li style="list-style-type: none; margin-left: 20px;">05.AI音乐与音频：Suno</li>
+                                        <li style="list-style-type: none; margin-left: 20px;">06.数字人与口型同步：HeyGen</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-date">2024.02-至今</div>
+                                <div class="timeline-content">
+                                    <h4>创业 - 跨境电商运营+培训</h4>
+                                    <p class="position">跨境电商创业者</p>
+                                    <ul class="timeline-list">
+                                        <li>负责TikTok跨境电商店铺全流程运营，涵盖选品上架、流量投放</li>
+                                        <li>主导TikTok跨境电商供应链管理，优化物流方案，降低库存周转周期，保障货物及时交付</li>
+                                        <li>设计TikTok跨境电商培训课程体系，针对新手卖家及进阶运营需求，输出选品、运营、变现等实操课程</li>
+                                        <li>开展TikTok跨境电商培训教学，通过线上授课、案例拆解、实操指导</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-date">2020.06-2024.02</div>
+                                <div class="timeline-content">
+                                    <h4>自媒体</h4>
+                                    <p class="position">创业者</p>
+                                    <ul class="timeline-list">
+                                        <li>负责新媒体平台（微信、抖音、小红书、快手等）定位规划</li>
+                                        <li>策划图文、短视频等内容形式，优化输出创意方案</li>
+                                        <li>完成文案撰写、视频拍摄及后期剪辑，保障内容质量</li>
+                                        <li>执行平台内带节奏内容选题，输送时间与频率</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-date">2016.04-2024.02</div>
+                                <div class="timeline-content">
+                                    <h4>雄安麦甜烘焙</h4>
+                                    <p class="position">创业者</p>
+                                    <ul class="timeline-list">
+                                        <li>供应链管理、成本控制、O2O线上运营（美团/饿了么）、私域流量转化</li>
+                                        <li>面点、裱花全技能</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-date">2010.09-2016.03</div>
+                                <div class="timeline-content">
+                                    <h4>山东长泰置业有限公司</h4>
+                                    <p class="position">文员</p>
+                                    <ul class="timeline-list">
+                                        <li>组织召开会议，做会议纪要</li>
+                                        <li>对新入职员工进行培训</li>
+                                        <li>协调各部门工作</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="resume-section">
+                        <h3 class="resume-section-title">教育经历</h3>
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-date">2006.09-2010.06</div>
+                                <div class="timeline-content">
+                                    <h4>山东理工大学</h4>
+                                    <p class="position">本科</p>
+                                    <p>土木工程专业</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2025 王瑞勇. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 作品详情模态框 -->
+    <div id="workModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="modal-body">
+                <!-- 模态框内容将通过JS动态填充 -->
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
