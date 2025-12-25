@@ -60,16 +60,25 @@
         });
     });
     
-    // 页面滚动时元素淡入效果
+    // 统一的IntersectionObserver配置，用于处理所有需要观察的元素
     const observerOptions = {
         threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
     };
     
+    // 统一的IntersectionObserver实例，处理所有观察逻辑
     const observer = new IntersectionObserver(function(entries) {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
+                // 处理元素淡入效果
+                if (entry.target.classList.contains('section') || entry.target.classList.contains('work-item')) {
+                    entry.target.classList.add('visible');
+                }
+                // 对于懒加载图片，浏览器的原生lazyload会处理，这里可以保留原有的JavaScript逻辑作为备选
+                if (entry.target.classList.contains('lazy')) {
+                    // 这里保留原有的懒加载逻辑作为备选
+                }
+                // 不再需要取消观察，浏览器会处理
             }
         });
     }, observerOptions);

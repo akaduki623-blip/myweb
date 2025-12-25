@@ -25,6 +25,13 @@ img.lazy.loaded {
     opacity: 1;
 }
 
+/* 确保所有图片都是响应式的 */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
 /* 图片占位符，避免布局跳动 */
 .work-cover, .banner-image {
     position: relative;
@@ -34,7 +41,7 @@ img.lazy.loaded {
 
 .work-cover img, .banner-image img {
     width: 100%;
-    height: auto;
+    height: 100%;
     object-fit: cover;
 }
 
@@ -51,12 +58,20 @@ body::before {
         linear-gradient(90deg, rgba(0, 240, 255, 0.05) 1px, transparent 1px);
     background-size: 50px 50px;
     z-index: -1;
+    /* Only animate on desktop */
     animation: gridMove 20s linear infinite;
 }
 
 @keyframes gridMove {
     0% { transform: translate(0, 0); }
     100% { transform: translate(50px, 50px); }
+}
+
+/* Disable grid animation on mobile for better performance */
+@media (max-width: 768px) {
+    body::before {
+        animation: none;
+    }
 }
 
 .container {
@@ -209,6 +224,9 @@ body::before {
                 radial-gradient(circle at 80% 20%, rgba(0, 240, 255, 0.1) 0%, transparent 50%);
     animation: auroraMove 8s ease-in-out infinite alternate;
     z-index: -1;
+    /* 使用硬件加速 */
+    transform: translateZ(0);
+    backface-visibility: hidden;
 }
 
 @keyframes auroraMove {
@@ -217,6 +235,33 @@ body::before {
     }
     100% {
         transform: translateX(30px) translateY(30px) scale(1.1);
+    }
+}
+
+/* Optimize animations for mobile */
+@media (max-width: 768px) {
+    .home::before {
+        /* Simplify background animation on mobile */
+        animation: auroraMove 12s ease-in-out infinite alternate;
+        /* Reduce opacity to improve performance */
+        opacity: 0.5;
+    }
+    
+    /* Disable some animations on mobile */
+    .typing-animation {
+        /* Simplify typing animation on mobile */
+        animation-duration: 0.5s;
+    }
+    
+    /* Reduce animation complexity for work items */
+    .work-card {
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    
+    /* Simplify hover effects on mobile */
+    .social-card:hover::before {
+        /* Disable rotating background on mobile */
+        opacity: 0;
     }
 }
 
