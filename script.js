@@ -92,35 +92,45 @@
     // 作品筛选功能
     const filterButtons = document.querySelectorAll('.filter-btn');
     const workItems = document.querySelectorAll('.work-item');
-    
+
+    // 筛选逻辑（单独函数，供初始化和点击事件共用）
+    function doFilter(filter) {
+        workItems.forEach(item => {
+            const category = item.getAttribute('data-category');
+
+            if (category === filter) {
+                item.style.display = 'block';
+                setTimeout(() => {
+                    item.classList.add('visible');
+                }, 50);
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    }
+
     filterButtons.forEach(button => {
         button.addEventListener('click', function() {
+            // 如果点击的是已选中的按钮，什么都不做
+            if (this.classList.contains('active')) {
+                return;
+            }
+
             // 移除所有按钮的active类
             filterButtons.forEach(btn => btn.classList.remove('active'));
             // 添加当前按钮的active类
             this.classList.add('active');
-            
+
             const filter = this.getAttribute('data-filter');
-            
-            workItems.forEach(item => {
-                const category = item.getAttribute('data-category');
-                
-                if (category === filter) {
-                    item.style.display = 'block';
-                    // 重新触发动画
-                    setTimeout(() => {
-                        item.classList.add('visible');
-                    }, 100);
-                } else {
-                    item.classList.remove('visible');
-                    // 使用setTimeout确保动画结束后隐藏
-                    setTimeout(() => {
-                        item.style.display = 'none';
-                    }, 500);
-                }
-            });
+            doFilter(filter);
         });
     });
+
+    // 页面加载时，立即执行一次筛选（根据当前 active 按钮）
+    const activeBtn = document.querySelector('.filter-btn.active');
+    if (activeBtn) {
+        doFilter(activeBtn.getAttribute('data-filter'));
+    }
     
     // 作品详情模态框
     const modal = document.getElementById('workModal');
@@ -377,7 +387,12 @@
             // 找到当前作品项
             const workCard = this.closest('.work-card');
             const workItem = workCard.closest('.work-item');
-            
+
+            // 如果是 case 分类（网站小程序），使用新的图片弹窗，不走旧逻辑
+            if (workItem && workItem.getAttribute('data-category') === 'case') {
+                return;
+            }
+
             // 获取作品索引（基于作品在HTML中的位置）
             const workItems = document.querySelectorAll('.work-item');
             const index = Array.from(workItems).indexOf(workItem);
@@ -457,75 +472,37 @@
         }, 3000);
     });
     
-    // 打字机效果增强 - 支持多文本切换
-    const typingTexts = [
-        "海陆空多栖创作者",
-        "AI内容创作专家",
-        "跨境电商运营者",
-        "前端开发工程师",
-        "视频制作达人"
-    ];
-    const typingElement = document.querySelector('.banner-text h3');
-    let currentTextIndex = 0;
-    let isDeleting = false;
-    let currentText = '';
-    let charIndex = 0;
-    let typingSpeed = 150;
-    
-    function type() {
-        const fullText = typingTexts[currentTextIndex];
-        
-        if (isDeleting) {
-            // 删除字符
-            currentText = fullText.substring(0, charIndex - 1);
-            charIndex--;
-            typingSpeed = 100;
-        } else {
-            // 添加字符
-            currentText = fullText.substring(0, charIndex + 1);
-            charIndex++;
-            typingSpeed = 150;
-        }
-        
-        typingElement.textContent = currentText;
-        
-        // 如果删除完所有字符，切换到下一个文本
-        if (isDeleting && currentText === '') {
-            isDeleting = false;
-            currentTextIndex = (currentTextIndex + 1) % typingTexts.length;
-            charIndex = 0;
-            setTimeout(type, 500);
-            return;
-        }
-        
-        // 如果写完所有字符，开始删除
-        if (!isDeleting && currentText === fullText) {
-            isDeleting = true;
-            typingSpeed = 1000;
-            setTimeout(type, 1500);
-            return;
-        }
-        
-        setTimeout(type, typingSpeed);
-    }
-    
-    // 延迟启动打字机效果，让CSS动画先运行
-    setTimeout(type, 3000);
-    
     // 动态背景交互 - 根据鼠标位置移动背景光效
     const homeSection = document.querySelector('.home');
-    
+
     homeSection.addEventListener('mousemove', function(e) {
         const rect = homeSection.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
-        
+
         // 计算鼠标在容器中的百分比位置
         const xPercent = (x / rect.width) * 2 - 1;
         const yPercent = (y / rect.height) * 2 - 1;
-        
+
         // 应用动态效果
         homeSection.style.setProperty('--mouse-x', xPercent * 20 + 'px');
         homeSection.style.setProperty('--mouse-y', yPercent * 20 + 'px');
     });
 });
+
+// 图片查看弹窗
+function openImgModal(src) {
+    const modal = document.getElementById('imgModal');
+    const content = document.getElementById('imgModalContent');
+    if (modal && content) {
+        content.src = src;
+        modal.style.display = 'flex';
+    }
+}
+
+function closeImgModal() {
+    const modal = document.getElementById('imgModal');
+    if (modal) {
+        modal.style.display = 'none';
+    }
+}
