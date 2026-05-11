@@ -490,6 +490,57 @@
     });
 });
 
+// 点击播放视频函数 - 弹窗播放
+function playVideo(overlay) {
+    const wrapper = overlay.closest('.video-cover-wrapper');
+    const iframe = wrapper.querySelector('.video-iframe');
+    const bvid = iframe.getAttribute('data-bvid') || wrapper.querySelector('.video-cover-img')?.getAttribute('data-bvid') || '';
+    
+    // 获取标题
+    const workCard = wrapper.closest('.work-card');
+    const titleEl = workCard?.querySelector('.work-info h3');
+    const title = titleEl ? titleEl.textContent : '视频播放';
+    
+    // 获取视频URL
+    const videoSrc = iframe.getAttribute('data-src');
+    
+    // 填充弹窗
+    const modal = document.getElementById('videoModal');
+    const player = document.getElementById('videoModalPlayer');
+    const titleBar = document.getElementById('videoModalTitle');
+    
+    // 清空并重新创建iframe
+    player.innerHTML = '';
+    const newIframe = document.createElement('iframe');
+    newIframe.src = videoSrc;
+    newIframe.style.width = '100%';
+    newIframe.style.height = '100%';
+    newIframe.style.border = 'none';
+    newIframe.allowFullscreen = true;
+    newIframe.allow = 'autoplay; encrypted-media';
+    player.appendChild(newIframe);
+    
+    titleBar.textContent = title;
+    modal.style.display = 'flex';
+    
+    // ESC关闭
+    document.addEventListener('keydown', function escClose(e) {
+        if (e.key === 'Escape') {
+            closeVideoModal();
+            document.removeEventListener('keydown', escClose);
+        }
+    });
+}
+
+// 关闭视频弹窗
+function closeVideoModal() {
+    const modal = document.getElementById('videoModal');
+    const player = document.getElementById('videoModalPlayer');
+    modal.style.display = 'none';
+    // 停止播放：清空iframe
+    player.innerHTML = '';
+}
+
 // 图片查看弹窗
 function openImgModal(src) {
     const modal = document.getElementById('imgModal');
