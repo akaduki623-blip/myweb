@@ -1037,6 +1037,14 @@ img {
     transition: transform 0.3s ease;
 }
 
+.lobster-icon {
+    background: transparent;
+}
+
+.lobster-emoji {
+    font-size: 24px;
+}
+
 .skill-item:hover .skill-icon {
     transform: scale(1.1);
 }

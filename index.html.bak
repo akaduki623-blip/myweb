@@ -4,57 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>王瑞勇 - 个人作品集</title>
-    <!-- Meta tags for SEO & Social Sharing -->
-    <meta name="description" content="王瑞勇的个人作品集，展示AIGC视频、编程开发、商业视觉等作品。AI武装的超级个体，一个人=策划+开发+设计+创作+运营。">
-    <meta name="keywords" content="王瑞勇,AIGC,AI动画,编程开发,商业视觉,个人作品集,AI广告,智能体开发">
+    <!-- Meta tags for performance optimization -->
+    <meta name="description" content="王瑞勇的个人作品集，展示AIGC视频、编程开发、商业视觉等作品。">
+    <meta name="keywords" content="王瑞勇,AIGC,AI动画,编程开发,商业视觉,个人作品集">
     <meta name="author" content="王瑞勇">
-    <!-- Open Graph for social sharing -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="王瑞勇 - AIGC创作者 & AI全栈个体">
-    <meta property="og:description" content="AI武装的超级个体：OpenClaw × Claude编程 × AIGC创作 × 图片设计 × AI办公">
-    <meta property="og:image" content="images/profile.jpg">
-    <meta property="og:url" content="https://rui.yongok.de5.net/">
-    <meta property="og:locale" content="zh_CN">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="王瑞勇 - AIGC创作者 & AI全栈个体">
-    <meta name="twitter:description" content="AI武装的超级个体：OpenClaw × Claude编程 × AIGC创作 × 图片设计 × AI办公">
-    <meta name="twitter:image" content="images/profile.jpg">
-    <link rel="canonical" href="https://rui.yongok.de5.net/">
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦞</text></svg>">
     <!-- Optimize for mobile -->
     <meta name="format-detection" content="telephone=no">
     <meta name="theme-color" content="#0B0E14">
     <!-- Performance optimization -->
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
-    <!-- JSON-LD Structured Data -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Person",
-        "name": "王瑞勇",
-        "jobTitle": "AIGC内容创作者",
-        "description": "AI武装的超级个体，一个人=策划+开发+设计+创作+运营",
-        "url": "https://wangruiyong.com",
-        "email": "381444742@qq.com",
-        "telephone": "+86-19833609806",
-        "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "雄安新区容城县",
-            "addressRegion": "河北省"
-        },
-        "knowsAbout": ["AIGC", "AI动画", "编程开发", "商业视觉", "智能体开发", "OpenClaw"],
-        "alumniOf": {
-            "@type": "CollegeOrUniversity",
-            "name": "山东理工大学"
-        }
-    }
-    </script>
+    <link rel="preload" href="styles.css" as="style">
+    <!-- Resource hints -->
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
     <!-- CSS files -->
     <link rel="stylesheet" href="styles.css">
-    <!-- Font Awesome async loading -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
-    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script>
         // 图片懒加载实现
         document.addEventListener('DOMContentLoaded', function() {
@@ -137,7 +101,7 @@
                 <li><a href="#home" class="nav-link active">首页</a></li>
                 <li><a href="#works" class="nav-link">作品展示</a></li>
                 <li><a href="#resume" class="nav-link">个人履历</a></li>
-                <li><a href="#contact" class="nav-link">联系我</a></li>
+                <li><a href="#resume" class="nav-link">联系我</a></li>
             </ul>
             <div class="menu-toggle">
                 <i class="fas fa-bars"></i>
@@ -149,6 +113,7 @@
     <section id="home" class="home section visible">
         <!-- 视频背景 -->
         <div class="video-bg">
+            <div class="video-placeholder"></div>
             <div class="video-overlay"></div>
         </div>
         <div class="container">
@@ -196,7 +161,7 @@
                     <div class="work-card">
                         <div class="work-cover video-cover-wrapper">
                             <!-- 视频封面图 -->
-                            <img class="video-cover-img" loading="lazy" data-bvid="BV1A5wuzQEhN" src="images/BV1A5wuzQEhN.jpg" alt="红酒品牌AI广告片封面">
+                            <img class="video-cover-img" data-bvid="BV1A5wuzQEhN" src="images/BV1A5wuzQEhN.jpg" alt="红酒品牌AI广告片封面">
                             <!-- 播放按钮遮罩 -->
                             <div class="video-play-overlay" onclick="playVideo(this)">
                                 <div class="video-play-btn">
@@ -217,7 +182,7 @@
                 <div class="work-item" data-category="video">
                     <div class="work-card">
                         <div class="work-cover video-cover-wrapper">
-                            <img class="video-cover-img" loading="lazy" data-bvid="BV1jUwkzqEvK" src="images/BV1jUwkzqEvK.jpg" alt="AI实战案例分享封面">
+                            <img class="video-cover-img" data-bvid="BV1jUwkzqEvK" src="images/BV1jUwkzqEvK.jpg" alt="AI实战案例分享封面">
                             <div class="video-play-overlay" onclick="playVideo(this)">
                                 <div class="video-play-btn">
                                     <i class="fas fa-play"></i>
@@ -236,7 +201,7 @@
                 <div class="work-item" data-category="video">
                     <div class="work-card">
                         <div class="work-cover video-cover-wrapper">
-                            <img class="video-cover-img" loading="lazy" data-bvid="BV17mwkzME79" src="images/BV17mwkzME79.jpg" alt="AI工具实战教程封面">
+                            <img class="video-cover-img" data-bvid="BV17mwkzME79" src="images/BV17mwkzME79.jpg" alt="AI工具实战教程封面">
                             <div class="video-play-overlay" onclick="playVideo(this)">
                                 <div class="video-play-btn">
                                     <i class="fas fa-play"></i>
@@ -255,7 +220,7 @@
                 <div class="work-item" data-category="video">
                     <div class="work-card">
                         <div class="work-cover video-cover-wrapper">
-                            <img class="video-cover-img" loading="lazy" data-bvid="BV17mwkzMEQk" src="images/BV17mwkzMEQk.jpg" alt="AI创作技巧分享封面">
+                            <img class="video-cover-img" data-bvid="BV17mwkzMEQk" src="images/BV17mwkzMEQk.jpg" alt="AI创作技巧分享封面">
                             <div class="video-play-overlay" onclick="playVideo(this)">
                                 <div class="video-play-btn">
                                     <i class="fas fa-play"></i>
@@ -274,7 +239,7 @@
                 <div class="work-item" data-category="video">
                     <div class="work-card">
                         <div class="work-cover video-cover-wrapper">
-                            <img class="video-cover-img" loading="lazy" data-bvid="BV1uPwCz4ESG" src="images/BV1uPwCz4ESG.jpg" alt="AI广告片制作教程封面">
+                            <img class="video-cover-img" data-bvid="BV1uPwCz4ESG" src="images/BV1uPwCz4ESG.jpg" alt="AI广告片制作教程封面">
                             <div class="video-play-overlay" onclick="playVideo(this)">
                                 <div class="video-play-btn">
                                     <i class="fas fa-play"></i>
@@ -293,7 +258,7 @@
                 <div class="work-item" data-category="video">
                     <div class="work-card">
                         <div class="work-cover video-cover-wrapper">
-                            <img class="video-cover-img" loading="lazy" data-bvid="BV1UJAczuEwQ" src="images/BV1UJAczuEwQ.jpg" alt="AI创作工作流揭秘封面">
+                            <img class="video-cover-img" data-bvid="BV1UJAczuEwQ" src="images/BV1UJAczuEwQ.jpg" alt="AI创作工作流揭秘封面">
                             <div class="video-play-overlay" onclick="playVideo(this)">
                                 <div class="video-play-btn">
                                     <i class="fas fa-play"></i>
@@ -312,7 +277,7 @@
                 <div class="work-item" data-category="video">
                     <div class="work-card">
                         <div class="work-cover video-cover-wrapper">
-                            <img class="video-cover-img" loading="lazy" data-bvid="BV1id9LBBEBE" src="images/BV1id9LBBEBE.jpg" alt="雄安9周年AI宣传片封面">
+                            <img class="video-cover-img" data-bvid="BV1id9LBBEBE" src="images/BV1id9LBBEBE.jpg" alt="雄安9周年AI宣传片封面">
                             <div class="video-play-overlay" onclick="playVideo(this)">
                                 <div class="video-play-btn">
                                     <i class="fas fa-play"></i>
@@ -331,7 +296,7 @@
                 <div class="work-item" data-category="video">
                     <div class="work-card">
                         <div class="work-cover video-cover-wrapper">
-                            <img class="video-cover-img" loading="lazy" data-bvid="BV1PvDLBGExy" src="images/BV1PvDLBGExy.jpg" alt="AI工具系列教程封面">
+                            <img class="video-cover-img" data-bvid="BV1PvDLBGExy" src="images/BV1PvDLBGExy.jpg" alt="AI工具系列教程封面">
                             <div class="video-play-overlay" onclick="playVideo(this)">
                                 <div class="video-play-btn">
                                     <i class="fas fa-play"></i>
@@ -350,7 +315,7 @@
                 <div class="work-item" data-category="video">
                     <div class="work-card">
                         <div class="work-cover video-cover-wrapper">
-                            <img class="video-cover-img" loading="lazy" data-bvid="BV1xPdpB5EGx" src="images/BV1xPdpB5EGx.jpg" alt="藏锋之沈财神重出江湖封面">
+                            <img class="video-cover-img" data-bvid="BV1xPdpB5EGx" src="images/BV1xPdpB5EGx.jpg" alt="藏锋之沈财神重出江湖封面">
                             <div class="video-play-overlay" onclick="playVideo(this)">
                                 <div class="video-play-btn">
                                     <i class="fas fa-play"></i>
@@ -369,7 +334,7 @@
                 <div class="work-item" data-category="video">
                     <div class="work-card">
                         <div class="work-cover video-cover-wrapper">
-                            <img class="video-cover-img" loading="lazy" data-bvid="BV1CyofB2EeS" src="images/BV1CyofB2EeS.jpg" alt="AI动画创作案例封面">
+                            <img class="video-cover-img" data-bvid="BV1CyofB2EeS" src="images/BV1CyofB2EeS.jpg" alt="AI动画创作案例封面">
                             <div class="video-play-overlay" onclick="playVideo(this)">
                                 <div class="video-play-btn">
                                     <i class="fas fa-play"></i>
@@ -388,7 +353,7 @@
                 <div class="work-item" data-category="video">
                     <div class="work-card">
                         <div class="work-cover video-cover-wrapper">
-                            <img class="video-cover-img" loading="lazy" data-bvid="BV1SGZFB4ET6" src="images/BV1SGZFB4ET6.jpg" alt="一条视频看雄安封面">
+                            <img class="video-cover-img" data-bvid="BV1SGZFB4ET6" src="images/BV1SGZFB4ET6.jpg" alt="一条视频看雄安封面">
                             <div class="video-play-overlay" onclick="playVideo(this)">
                                 <div class="video-play-btn">
                                     <i class="fas fa-play"></i>
@@ -407,7 +372,7 @@
                 <div class="work-item" data-category="video">
                     <div class="work-card">
                         <div class="work-cover video-cover-wrapper">
-                            <img class="video-cover-img" loading="lazy" data-bvid="BV1FJ546LEHS" src="images/BV1FJ546LEHS.jpg" alt="AI商业应用案例封面">
+                            <img class="video-cover-img" data-bvid="BV1FJ546LEHS" src="images/BV1FJ546LEHS.jpg" alt="AI商业应用案例封面">
                             <div class="video-play-overlay" onclick="playVideo(this)">
                                 <div class="video-play-btn">
                                     <i class="fas fa-play"></i>
@@ -426,7 +391,7 @@
                 <div class="work-item" data-category="video">
                     <div class="work-card">
                         <div class="work-cover video-cover-wrapper">
-                            <img class="video-cover-img" loading="lazy" data-bvid="BV1JJ546LEiM" src="images/BV1JJ546LEiM.jpg" alt="AI视频制作教程封面">
+                            <img class="video-cover-img" data-bvid="BV1JJ546LEiM" src="images/BV1JJ546LEiM.jpg" alt="AI视频制作教程封面">
                             <div class="video-play-overlay" onclick="playVideo(this)">
                                 <div class="video-play-btn">
                                     <i class="fas fa-play"></i>
@@ -445,7 +410,7 @@
                 <div class="work-item" data-category="video">
                     <div class="work-card">
                         <div class="work-cover video-cover-wrapper">
-                            <img class="video-cover-img" loading="lazy" data-bvid="BV1oW546rE1f" src="images/BV1oW546rE1f.jpg" alt="AI创意内容分享封面" onerror="this.src='images/profile.jpg';this.onerror=null;">
+                            <img class="video-cover-img" data-bvid="BV1oW546rE1f" src="images/BV1oW546rE1f.jpg" alt="AI创意内容分享封面">
                             <div class="video-play-overlay" onclick="playVideo(this)">
                                 <div class="video-play-btn">
                                     <i class="fas fa-play"></i>
@@ -466,16 +431,18 @@
                         <div class="work-cover">
                             <img class="lazy" 
                                  data-src="images/work16.jpg" 
-                                                                  alt="品牌LOGO设计" 
+                                 data-srcset="images/work16.jpg 400w, images/work16.jpg 800w" 
+                                 alt="品牌视觉识别系统" 
                                  loading="lazy" 
                                  width="400" 
-                                 height="300">
+                                 height="300" 
+                                 sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw">
                             <div class="work-overlay">
-                                <button class="view-btn" onclick="openImgModal('images/work16.jpg')">查看详情</button>
+                                <button class="view-btn">查看详情</button>
                             </div>
                         </div>
                         <div class="work-info">
-                            <h3>品牌LOGO设计</h3>
+                            <h3>品牌视觉识别系统</h3>
                             <p class="work-category">商业视觉</p>
                         </div>
                     </div>
@@ -486,16 +453,18 @@
                         <div class="work-cover">
                             <img class="lazy" 
                                  data-src="images/work17.jpg" 
-                                                                  alt="品牌宣传物料" 
+                                 data-srcset="images/work17.jpg 400w, images/work17.jpg 800w" 
+                                 alt="品牌视觉识别系统" 
                                  loading="lazy" 
                                  width="400" 
-                                 height="300">
+                                 height="300" 
+                                 sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw">
                             <div class="work-overlay">
-                                <button class="view-btn" onclick="openImgModal('images/work17.jpg')">查看详情</button>
+                                <button class="view-btn">查看详情</button>
                             </div>
                         </div>
                         <div class="work-info">
-                            <h3>品牌宣传物料</h3>
+                            <h3>品牌视觉识别系统</h3>
                             <p class="work-category">商业视觉</p>
                         </div>
                     </div>
@@ -506,16 +475,18 @@
                         <div class="work-cover">
                             <img class="lazy" 
                                  data-src="images/work18.jpg" 
-                                                                  alt="产品包装设计" 
+                                 data-srcset="images/work18.jpg 400w, images/work18.jpg 800w" 
+                                 alt="品牌视觉识别系统" 
                                  loading="lazy" 
                                  width="400" 
-                                 height="300">
+                                 height="300" 
+                                 sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw">
                             <div class="work-overlay">
-                                <button class="view-btn" onclick="openImgModal('images/work18.jpg')">查看详情</button>
+                                <button class="view-btn">查看详情</button>
                             </div>
                         </div>
                         <div class="work-info">
-                            <h3>产品包装设计</h3>
+                            <h3>品牌视觉识别系统</h3>
                             <p class="work-category">商业视觉</p>
                         </div>
                     </div>
@@ -526,16 +497,18 @@
                         <div class="work-cover">
                             <img class="lazy" 
                                  data-src="images/work19.jpg" 
-                                                                  alt="AI漫剧人物图" 
+                                 data-srcset="images/work19.jpg 400w, images/work19.jpg 800w" 
+                                 alt="上海旅游景点" 
                                  loading="lazy" 
                                  width="400" 
-                                 height="300">
+                                 height="300" 
+                                 sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw">
                             <div class="work-overlay">
-                                <button class="view-btn" onclick="openImgModal('images/work19.jpg')">查看详情</button>
+                                <button class="view-btn">查看详情</button>
                             </div>
                         </div>
                         <div class="work-info">
-                            <h3>AI漫剧人物图</h3>
+                            <h3>上海旅游景点</h3>
                             <p class="work-category">商业视觉</p>
                         </div>
                     </div>
@@ -546,12 +519,14 @@
                         <div class="work-cover">
                             <img class="lazy" 
                                  data-src="images/work20.jpg" 
-                                                                  alt="UI设计" 
+                                 data-srcset="images/work20.jpg 400w, images/work20.jpg 800w" 
+                                 alt="UI设计" 
                                  loading="lazy" 
                                  width="400" 
-                                 height="300">
+                                 height="300" 
+                                 sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw">
                             <div class="work-overlay">
-                                <button class="view-btn" onclick="openImgModal('images/work20.jpg')">查看详情</button>
+                                <button class="view-btn">查看详情</button>
                             </div>
                         </div>
                         <div class="work-info">
@@ -566,17 +541,20 @@
                         <div class="work-cover">
                             <img class="lazy" 
                                  data-src="images/work2.jpg" 
-                                                                  alt="AI漫剧故事版" 
+                                 data-srcset="images/work2.jpg 400w, images/work2.jpg 800w" 
+                                 alt="从0开始认识AI" 
                                  loading="lazy" 
                                  width="400" 
-                                 height="300"
-                                 >
+                                 height="300" 
+                                 sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw">
                             <div class="work-overlay">
-                                <button class="view-btn" onclick="openImgModal('images/work2.jpg')">查看详情</button>
+                                <a href="https://docs.qq.com/pdf/DZEtrbFRUTmx4VUZN">
+                                <button class="view-btn">查看详情</button>
+                                </a>
                             </div>
                         </div>
                         <div class="work-info">
-                            <h3>AI漫剧故事版</h3>
+                            <h3>从0开始认识AI</h3>
                             <p class="work-category">商业视觉</p>
                         </div>
                     </div>
@@ -587,11 +565,12 @@
     <div class="work-cover">
       <img class="lazy" 
            data-src="images/work22.jpg" 
-                      alt="寺庙财务系统" 
+           data-srcset="images/work22.jpg 400w, images/work22.jpg 800w" 
+           alt="寺庙财务系统" 
            loading="lazy" 
            width="400" 
-           height="300"
-                                 >
+           height="300" 
+           sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw">
       <div class="work-overlay">
         <button class="view-btn" onclick="openImgModal('images/work22.jpg')">查看详情</button>
       </div>
@@ -608,11 +587,12 @@
     <div class="work-cover">
       <img class="lazy" 
            data-src="images/work23.jpg" 
-                      alt="企业官网" 
+           data-srcset="images/work23.jpg 400w, images/work23.jpg 800w" 
+           alt="企业官网" 
            loading="lazy" 
            width="400" 
-           height="300"
-                                 >
+           height="300" 
+           sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw">
       <div class="work-overlay">
         <button class="view-btn" onclick="openImgModal('images/work23.jpg')">查看详情</button>
       </div>
@@ -629,11 +609,12 @@
     <div class="work-cover">
       <img class="lazy" 
            data-src="images/work24.jpg" 
-                      alt="个人作品集" 
+           data-srcset="images/work24.jpg 400w, images/work24.jpg 800w" 
+           alt="个人作品集" 
            loading="lazy" 
            width="400" 
-           height="300"
-                                 >
+           height="300" 
+           sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw">
       <div class="work-overlay">
         <button class="view-btn" onclick="openImgModal('images/work24.jpg')">查看详情</button>
       </div>
@@ -644,65 +625,68 @@
     </div>
   </div>
 </div>
-                <!-- 水韵太极酒·品牌海报 -->
+                <!-- 新增作品25 -->
 <div class="work-item" data-category="visual">
   <div class="work-card">
     <div class="work-cover">
       <img class="lazy"
            data-src="images/work25.jpg"
-                      alt="水韵太极酒·品牌海报"
+           data-srcset="images/work25.jpg 400w, images/work25.jpg 800w"
+           alt="新增作品25"
            loading="lazy"
            width="400"
            height="300"
-                                 >
+           sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw">
       <div class="work-overlay">
         <button class="view-btn" onclick="openImgModal('images/work25.jpg')">查看详情</button>
       </div>
     </div>
     <div class="work-info">
-      <h3>水韵太极酒·品牌海报</h3>
+      <h3>新增作品25</h3>
       <p class="work-category">商业视觉</p>
     </div>
   </div>
 </div>
-                <!-- 蒲品体验馆·门店视觉 -->
+                <!-- 新增作品26 -->
 <div class="work-item" data-category="visual">
   <div class="work-card">
     <div class="work-cover">
       <img class="lazy"
            data-src="images/work26.jpg"
-                      alt="蒲品体验馆·门店视觉"
+           data-srcset="images/work26.jpg 400w, images/work26.jpg 800w"
+           alt="新增作品26"
            loading="lazy"
            width="400"
            height="300"
-                                 >
+           sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw">
       <div class="work-overlay">
         <button class="view-btn" onclick="openImgModal('images/work26.jpg')">查看详情</button>
       </div>
     </div>
     <div class="work-info">
-      <h3>蒲品体验馆·门店视觉</h3>
+      <h3>新增作品26</h3>
       <p class="work-category">商业视觉</p>
     </div>
   </div>
 </div>
-                <!-- 生鲜电商·UI界面设计 -->
+                <!-- 新增作品27 -->
 <div class="work-item" data-category="visual">
   <div class="work-card">
     <div class="work-cover">
       <img class="lazy"
            data-src="images/work27.jpg"
-                      alt="生鲜电商·UI界面设计"
+           data-srcset="images/work27.jpg 400w, images/work27.jpg 800w"
+           alt="新增作品27"
            loading="lazy"
            width="400"
            height="300"
-                                 >
+           sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw">
       <div class="work-overlay">
         <button class="view-btn" onclick="openImgModal('images/work27.jpg')">查看详情</button>
       </div>
     </div>
     <div class="work-info">
-      <h3>生鲜电商·UI界面设计</h3>
+      <h3>新增作品27</h3>
       <p class="work-category">商业视觉</p>
     </div>
   </div>
@@ -856,7 +840,7 @@
     <!-- 图片查看弹窗 -->
     <div id="imgModal" class="img-modal" onclick="closeImgModal()">
         <span class="img-modal-close">&times;</span>
-        <img id="imgModalContent" class="img-modal-content" alt="作品预览" onclick="event.stopPropagation()">
+        <img id="imgModalContent" class="img-modal-content" onclick="event.stopPropagation()">
     </div>
 
     
@@ -1041,13 +1025,25 @@
                             </div>
                         </div>
                     </div>
-                    <div class="resume-section" id="contact">
+                    <div class="resume-section">
                         <h3 class="resume-section-title">联系我</h3>
                         <div class="contact-form">
-                            <div class="wechat-qr">
-                                <img src="images/wechat-qr.png" alt="微信二维码" class="qr-img" loading="lazy">
-                                <p class="qr-tip">扫一扫上面的二维码，加我微信</p>
-                                                            </div>
+                            <h3>留言表单</h3>
+                            <form id="contactForm">
+                                <div class="form-group">
+                                    <input type="text" name="name" placeholder="您的姓名" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" name="email" placeholder="您的邮箱" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" name="subject" placeholder="留言主题">
+                                </div>
+                                <div class="form-group">
+                                    <textarea name="message" placeholder="您的留言内容" rows="5" required></textarea>
+                                </div>
+                                <button type="submit" class="submit-btn">发送留言</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -1071,7 +1067,7 @@
                                 </div>
                             </div>
                             <div class="timeline-item">
-                                <div class="timeline-date">2024.02-2026.02</div>
+                                <div class="timeline-date">2024.02-2026.2</div>
                                 <div class="timeline-content">
                                     <h4>创业 - 跨境电商运营+培训</h4>
                                     <p class="position">跨境电商创业者</p>
@@ -1143,7 +1139,7 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
-                <p>&copy; 2026 王瑞勇. 保留所有权利.</p>
+                <p>&copy; 2025 王瑞勇. 保留所有权利.</p>
             </div>
         </div>
     </footer>
@@ -1158,6 +1154,6 @@
         </div>
     </div>
 
-    <script src="script.js?v=20260525"></script>
+    <script src="script.js"></script>
 </body>
 </html>
