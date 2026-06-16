@@ -99,12 +99,16 @@
             const category = item.getAttribute('data-category');
 
             if (category === filter) {
-                item.style.display = 'block';
+                item.classList.remove('hiding');
+                item.style.display = '';
                 setTimeout(() => {
                     item.classList.add('visible');
                 }, 50);
             } else {
-                item.style.display = 'none';
+                item.classList.add('hiding');
+                setTimeout(() => {
+                    if (item.classList.contains('hiding')) item.style.display = 'none';
+                }, 300);
             }
         });
     }
@@ -265,33 +269,6 @@
         }
     });
     
-    // 联系表单提交
-    const contactForm = document.getElementById('contactForm');
-    
-    contactForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        // 创建成功提示元素
-        let successMessage = document.querySelector('.form-success');
-        if (!successMessage) {
-            successMessage = document.createElement('div');
-            successMessage.className = 'form-success';
-            successMessage.textContent = '留言发送成功！感谢您的关注。';
-            contactForm.appendChild(successMessage);
-        }
-        
-        // 显示成功消息
-        successMessage.classList.add('show');
-        
-        // 重置表单
-        contactForm.reset();
-        
-        // 3秒后隐藏成功消息
-        setTimeout(() => {
-            successMessage.classList.remove('show');
-        }, 3000);
-    });
-    
     // 动态背景交互 - 根据鼠标位置移动背景光效
     const homeSection = document.querySelector('.home');
 
@@ -380,4 +357,28 @@ function closeImgModal() {
     if (content) {
         content.src = '';
     }
+}
+
+// 导航栏滚动高亮
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-link');
+
+const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            navLinks.forEach(link => link.classList.remove('active'));
+            const activeLink = document.querySelector(`.nav-link[href="#${entry.target.id}"]`);
+            if (activeLink) activeLink.classList.add('active');
+        }
+    });
+}, { threshold: 0.4 });
+
+sections.forEach(section => sectionObserver.observe(section));
+
+// 返回顶部按钮
+const backToTop = document.getElementById('back-to-top');
+if (backToTop) {
+    window.addEventListener('scroll', () => {
+        backToTop.classList.toggle('visible', window.scrollY > 400);
+    });
 }
