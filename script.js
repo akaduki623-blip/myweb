@@ -161,14 +161,14 @@
             cover: 'images/work3.jpg',
             background: '本作品是一首原创歌曲的音乐视频，以雄安新区为背景，表达了年轻人追逐梦想的精神。',
             tools: ['Logic Pro', 'After Effects', 'Premiere Pro', 'AI音频生成'],
-            link: 'http://xhslink.com/o/69Ojfr4lY0z',
+            link: 'https://xhslink.com/o/69Ojfr4lY0z',
             content: `<p>这是一首为雄安新区创作的原创歌曲，通过音乐和视频展现了年轻人在雄安追逐梦想的故事。歌曲融合了流行元素和励志主题，视频则记录了雄安新区的发展变化。</p><p>作品采用了AI辅助的音频制作和视频剪辑技术，提高了创作效率和作品质量。</p>`
         },
         {
             id: 3,
             title: '一条视频看雄安 - 起笔千年，画就未来',
             category: '视频作品',
-            cover: 'http://i1.hdslb.com/bfs/archive/a10e6fead03f3716e7ad2b4b8a85b46909e8f845.jpg',
+            cover: 'https://i1.hdslb.com/bfs/archive/a10e6fead03f3716e7ad2b4b8a85b46909e8f845.jpg',
             background: '"这么近，那么美，周末到河北。" 五一长假将至，雄安与你同行AI视觉实验室开启了两天两夜的极限创作模式。通过"实拍+AIGC视觉重构"，无数次AI"抽卡"与筛选，最终剪辑出白鹭视角飞越雄安的短片。',
             tools: ['AI视频生成', '实拍', 'AI抽卡筛选', '后期剪辑'],
             link: 'https://www.bilibili.com/video/BV1SGZFB4ET6',
