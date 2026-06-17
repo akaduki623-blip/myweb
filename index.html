@@ -110,14 +110,14 @@
                         if (lazyImages.length === 0) {
                             document.removeEventListener('scroll', lazyLoad);
                             window.removeEventListener('resize', lazyLoad);
-                            window.removeEventListener('orientationChange', lazyLoad);
+                            window.removeEventListener('orientationchange', lazyLoad);
                         }
                     }, 20);
                 }
                 
                 document.addEventListener('scroll', lazyLoad);
                 window.addEventListener('resize', lazyLoad);
-                window.addEventListener('orientationChange', lazyLoad);
+                window.addEventListener('orientationchange', lazyLoad);
                 
                 lazyLoad();
             }
