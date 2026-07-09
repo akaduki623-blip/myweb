@@ -152,7 +152,7 @@
                 <li><a href="#results" class="nav-link">案例效果</a></li>
                 <li><a href="#coding" class="nav-link">编程项目</a></li>
                 <li><a href="#resume" class="nav-link">个人履历</a></li>
-                <li><a href="#contact" class="nav-link">联系我</a></li>
+                <li><a href="#resume-contact" class="nav-link">联系我</a></li>
             </ul>
             <div class="menu-toggle">
                 <i class="fas fa-bars"></i>
@@ -162,9 +162,8 @@
 
     <!-- 首页 -->
     <section id="home" class="home section visible">
-        <!-- 首屏背景：3D 宇航员场景（three.js, Lusion 风格）为前景，视频作加载兜底 -->
+        <!-- 首屏背景：视频 + 粒子光点效果 -->
         <div class="video-bg">
-            <div id="hero3d"></div>
             <video class="hero-video" autoplay muted loop playsinline preload="metadata"
                    id="heroVideo">
                 <source src="https://assets.mixkit.co/videos/31771/31771-720.mp4" type="video/mp4">
@@ -182,7 +181,7 @@
                         <h3>一个人 = 策划 + 开发 + 设计 + 创作 + 运营</h3>
                         <div class="hero-cta">
                             <a href="#works" class="btn btn-primary"><i class="fas fa-play-circle" aria-hidden="true"></i> 查看作品</a>
-                            <a href="#contact" class="btn btn-ghost"><i class="fas fa-paper-plane" aria-hidden="true"></i> 联系我</a>
+                            <a href="#resume-contact" class="btn btn-ghost"><i class="fas fa-paper-plane" aria-hidden="true"></i> 联系我</a>
                         </div>
                     </div>
                     <div class="banner-image">
@@ -1124,29 +1123,6 @@
         </div>
     </section>
 
-    <!-- 联系我 -->
-    <section id="contact" class="contact section">
-        <div class="container">
-            <div class="section-eyebrow"><span>05</span> GET IN TOUCH</div>
-            <h2 class="section-title">联系我</h2>
-            <p class="section-subtitle">无论是 AI 视频、网站开发还是商业视觉合作，欢迎随时沟通</p>
-            <div class="contact-card">
-                <div class="contact-qr">
-                    <img src="images/wechat-qr.png" alt="微信二维码" loading="lazy">
-                    <p class="qr-tip">微信扫码，加我好友</p>
-                </div>
-                <div class="contact-lines">
-                    <div class="info-item"><span class="label">电话：</span><span class="value">19833609806</span></div>
-                    <div class="info-item"><span class="label">邮箱：</span><span class="value"><a href="mailto:381444742@qq.com">381444742@qq.com</a></span></div>
-                    <div class="info-item"><span class="label">坐标：</span><span class="value">雄安新区容城县</span></div>
-                </div>
-            </div>
-            <div class="contact-cta">
-                <a href="#home" class="btn btn-primary"><i class="fas fa-arrow-up" aria-hidden="true"></i> 回到首页</a>
-            </div>
-        </div>
-    </section>
-
     <!-- 页脚 -->
     <footer class="footer">
         <div class="container">
@@ -1180,7 +1156,6 @@
       }
     }
     </script>
-    <script type="module" src="hero-astronaut.js"></script>
     <script src="script.js?v=20260707"></script>
 </body>
 </html>
