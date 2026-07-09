@@ -23,10 +23,14 @@
             const targetId = this.getAttribute('href');
             const targetSection = document.querySelector(targetId);
             
-            window.scrollTo({
-                top: targetSection.offsetTop - 70,
-                behavior: 'smooth'
-            });
+            if (window.__lenis) {
+                window.__lenis.scrollTo(targetSection, { offset: -70 });
+            } else {
+                window.scrollTo({
+                    top: targetSection.offsetTop - 70,
+                    behavior: 'smooth'
+                });
+            }
         });
     });
     
@@ -231,24 +235,24 @@
                     <p class="work-category" style="margin-bottom: 20px;">${work.category}</p>
                     
                     <div class="detail-section">
-                        <h3 style="margin-bottom: 10px; color: #2c3e50;">创作背景</h3>
-                        <p style="margin-bottom: 20px; color: #555;">${work.background}</p>
+                        <h3 style="margin-bottom: 10px; color: var(--text-main);">创作背景</h3>
+                        <p style="margin-bottom: 20px; color: var(--text-sec);">${work.background}</p>
                     </div>
                     
                     <div class="detail-section">
-                        <h3 style="margin-bottom: 10px; color: #2c3e50;">使用工具</h3>
+                        <h3 style="margin-bottom: 10px; color: var(--text-main);">使用工具</h3>
                         <div class="tools-list" style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px;">
-                            ${work.tools.map(tool => `<span style="padding: 8px 16px; background-color: #ecf0f1; color: #2c3e50; border-radius: 20px; font-size: 14px;">${tool}</span>`).join('')}
+                            ${work.tools.map(tool => `<span style="padding: 8px 16px; background: var(--card-bg); color: var(--text-sec); border: 1px solid var(--card-border); border-radius: 20px; font-size: 14px;">${tool}</span>`).join('')}
                         </div>
                     </div>
                     
                     <div class="detail-section">
-                        <h3 style="margin-bottom: 10px; color: #2c3e50;">作品内容</h3>
-                        <div style="color: #555; line-height: 1.6; margin-bottom: 20px;">${work.content}</div>
+                        <h3 style="margin-bottom: 10px; color: var(--text-main);">作品内容</h3>
+                        <div style="color: var(--text-sec); line-height: 1.6; margin-bottom: 20px;">${work.content}</div>
                     </div>
                     
                     <div class="detail-section">
-                        <a href="${work.link}" target="_blank" style="display: inline-block; padding: 12px 30px; background-color: #3498db; color: #fff; text-decoration: none; border-radius: 25px; font-weight: 600; transition: all 0.3s ease;">查看成品</a>
+                        <a href="${work.link}" target="_blank" style="display: inline-block; padding: 12px 30px; background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple)); color: var(--bg-color); text-decoration: none; border-radius: 25px; font-weight: 600; transition: all 0.3s ease;">查看成品</a>
                     </div>
                 </div>
             `;
@@ -284,8 +288,118 @@
         // 应用动态效果
         homeSection.style.setProperty('--mouse-x', xPercent * 20 + 'px');
         homeSection.style.setProperty('--mouse-y', yPercent * 20 + 'px');
+        // Hero 视差：图片与文字反向位移，制造景深（Pro 技术）
+        const img = homeSection.querySelector('.banner-image');
+        const txt = homeSection.querySelector('.banner-text');
+        if (img) img.style.transform = 'translate(' + (xPercent * -16).toFixed(1) + 'px,' + (yPercent * -16).toFixed(1) + 'px)';
+        if (txt) txt.style.transform = 'translate(' + (xPercent * 10).toFixed(1) + 'px,' + (yPercent * 10).toFixed(1) + 'px)';
+    });
+
+    // 鼠标离开首屏：内容回正
+    homeSection.addEventListener('mouseleave', function() {
+        const img = homeSection.querySelector('.banner-image');
+        const txt = homeSection.querySelector('.banner-text');
+        if (img) img.style.transform = '';
+        if (txt) txt.style.transform = '';
     });
 });
+
+/* ===== Pro 升级：Lenis 平滑滚动 + Hero 滚动叙事 + 滚动提示 ===== */
+(function () {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Lenis 平滑滚动（CDN 未加载 / 减弱动效时降级原生）
+    if (window.Lenis && !reduceMotion) {
+        const lenis = new Lenis({
+            duration: 1.1,
+            easing: function (t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); },
+            smoothWheel: true
+        });
+        function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+        requestAnimationFrame(raf);
+        window.__lenis = lenis;
+    }
+
+    // Hero 滚动叙事：离开首屏时内容轻微上移 + 淡出（滚动驱动故事感）
+    const homeContent = document.querySelector('.home-content');
+    const homeSection = document.querySelector('.home');
+    if (homeContent && homeSection && !reduceMotion) {
+        window.addEventListener('scroll', function () {
+            const y = window.scrollY || document.documentElement.scrollTop;
+            const h = homeSection.offsetHeight || 1;
+            const p = Math.min(y / (h * 0.85), 1);
+            homeContent.style.transform = 'translateY(' + (p * 64).toFixed(1) + 'px)';
+            homeContent.style.opacity = (1 - p * 0.65).toFixed(2);
+        }, { passive: true });
+    }
+
+    // 滚动提示点击 → 平滑滚动到作品区
+    const cue = document.querySelector('.scroll-cue');
+    if (cue) {
+        cue.addEventListener('click', function (e) {
+            e.preventDefault();
+            const t = document.querySelector('#works');
+            if (window.__lenis) window.__lenis.scrollTo(t, { offset: -70 });
+            else if (t) t.scrollIntoView({ behavior: 'smooth' });
+        });
+    }
+
+    // 首屏漂浮光点层（Lusion 宇航员场景的克制版：少量、缓慢、随鼠标视差）
+    const floatCanvas = homeSection.querySelector('.hero-float');
+    if (floatCanvas && !reduceMotion) {
+        const ctx = floatCanvas.getContext('2d');
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        const COLORS = ['56,189,248', '167,139,250', '240,171,252'];
+        const COUNT = 14;
+        let W = 0, H = 0, mx = 0, my = 0, particles = [];
+        function size() {
+            const r = floatCanvas.getBoundingClientRect();
+            W = r.width; H = r.height;
+            floatCanvas.width = W * dpr; floatCanvas.height = H * dpr;
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        }
+        function seed() {
+            particles = [];
+            for (let i = 0; i < COUNT; i++) {
+                const big = i % 3 === 0;
+                particles.push({
+                    x: Math.random() * W, y: Math.random() * H,
+                    r: big ? (14 + Math.random() * 18) : (2.5 + Math.random() * 4),
+                    a: big ? (0.28 + Math.random() * 0.18) : (0.45 + Math.random() * 0.30),
+                    depth: 0.25 + Math.random() * 0.75,
+                    vx: (Math.random() - 0.5) * 0.22,
+                    vy: (Math.random() - 0.5) * 0.22,
+                    c: COLORS[i % COLORS.length]
+                });
+            }
+        }
+        function draw() {
+            ctx.clearRect(0, 0, W, H);
+            for (const p of particles) {
+                p.x += p.vx; p.y += p.vy;
+                if (p.x < -20) p.x = W + 20; else if (p.x > W + 20) p.x = -20;
+                if (p.y < -20) p.y = H + 20; else if (p.y > H + 20) p.y = -20;
+                const x = p.x + mx * p.depth * 48, y = p.y + my * p.depth * 48;
+                const R = p.r * 4.0;
+                const g = ctx.createRadialGradient(x, y, 0, x, y, R);
+                g.addColorStop(0, 'rgba(' + p.c + ',' + p.a + ')');
+                g.addColorStop(1, 'rgba(' + p.c + ',0)');
+                ctx.fillStyle = g;
+                ctx.beginPath(); ctx.arc(x, y, R, 0, Math.PI * 2); ctx.fill();
+            }
+            requestAnimationFrame(draw);
+        }
+        size(); seed();
+        window.addEventListener('resize', function () { size(); seed(); });
+        homeSection.addEventListener('mousemove', function (e) {
+            const r = homeSection.getBoundingClientRect();
+            mx = ((e.clientX - r.left) / r.width) * 2 - 1;
+            my = ((e.clientY - r.top) / r.height) * 2 - 1;
+        });
+        homeSection.addEventListener('mouseleave', function () { mx = 0; my = 0; });
+        requestAnimationFrame(draw);
+    }
+})();
 
 // 点击播放视频函数 - 弹窗播放
 function playVideo(overlay) {
@@ -319,14 +433,6 @@ function playVideo(overlay) {
     
     titleBar.textContent = title;
     modal.style.display = 'flex';
-    
-    // ESC关闭
-    document.addEventListener('keydown', function escClose(e) {
-        if (e.key === 'Escape') {
-            closeVideoModal();
-            document.removeEventListener('keydown', escClose);
-        }
-    });
 }
 
 // 关闭视频弹窗
@@ -382,3 +488,89 @@ if (backToTop) {
         backToTop.classList.toggle('visible', window.scrollY > 400);
     });
 }
+
+/* ===== 高级感增强：鼠标光斑 / 浮动光球 / 滚动进度 / 卡片 3D 倾斜 ===== */
+(function () {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // 顶部滚动进度条
+    const progress = document.getElementById('scroll-progress');
+    if (progress) {
+        const onScroll = function () {
+            const doc = document.documentElement;
+            const max = (doc.scrollHeight - doc.clientHeight) || 1;
+            const ratio = (doc.scrollTop || document.body.scrollTop) / max;
+            progress.style.width = (ratio * 100).toFixed(2) + '%';
+        };
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+    }
+
+    // 作品卡片 3D 倾斜（仅精确指针且非减弱动效）
+    if (!reduceMotion && window.matchMedia('(pointer: fine)').matches) {
+        document.querySelectorAll('.work-card').forEach(function (card) {
+            card.addEventListener('mousemove', function (e) {
+                const r = card.getBoundingClientRect();
+                const px = (e.clientX - r.left) / r.width - 0.5;
+                const py = (e.clientY - r.top) / r.height - 0.5;
+                card.style.transform = 'translateY(-8px) rotateX(' + (-py * 6).toFixed(2) + 'deg) rotateY(' + (px * 6).toFixed(2) + 'deg)';
+            });
+            card.addEventListener('mouseleave', function () {
+                card.style.transform = '';
+            });
+        });
+    }
+
+    // 按钮磁吸效果（光标靠近时轻微位移，与手电筒互补，增强交互）
+    if (!reduceMotion && window.matchMedia('(pointer: fine)').matches) {
+        document.querySelectorAll('.btn').forEach(function (btn) {
+            btn.addEventListener('mousemove', function (e) {
+                const r = btn.getBoundingClientRect();
+                const x = (e.clientX - r.left - r.width / 2) * 0.18;
+                const y = (e.clientY - r.top - r.height / 2) * 0.28;
+                btn.style.transform = 'translate(' + x.toFixed(1) + 'px, ' + y.toFixed(1) + 'px)';
+            });
+            btn.addEventListener('mouseleave', function () {
+                btn.style.transform = '';
+            });
+        });
+
+        // 鼠标光标拖尾（柔和科技感轨迹，非手电筒——微光点跟随+缓动延迟）
+        var trail = document.getElementById('cursorTrail');
+        if (trail) {
+            var trailX = 0, trailY = 0;
+            var mouseX = -100, mouseY = -100;
+            // 主鼠标跟踪
+            document.addEventListener('mousemove', function(e) {
+                mouseX = e.clientX; mouseY = e.clientY;
+                trail.classList.add('active');
+            });
+            document.addEventListener('mouseleave', function() {
+                trail.classList.remove('active');
+                mouseX = -100; mouseY = -100;
+            });
+            // 缓动跟随（每帧插值，制造丝滑拖尾感）
+            function animateTrail() {
+                trailX += (mouseX - trailX) * 0.15;
+                trailY += (mouseY - trailY) * 0.15;
+                trail.style.transform = 'translate(' + (trailX - 10).toFixed(1) + 'px,' + (trailY - 10).toFixed(1) + 'px)';
+                requestAnimationFrame(animateTrail);
+            }
+            animateTrail();
+            // 悬浮交互元素时放大
+            var hoverTargets = document.querySelectorAll('a, button, .btn, .work-card, .nav-link, .tag, .scroll-cue');
+            hoverTargets.forEach(function(el) {
+                el.addEventListener('mouseenter', function() { trail.classList.add('hover'); });
+                el.addEventListener('mouseleave', function() { trail.classList.remove('hover'); });
+            });
+        }
+    }
+})();
+
+// 全局 ESC 关闭弹窗（只注册一次，避免重复打开视频时监听器泄漏）
+document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+        closeVideoModal();
+        closeImgModal();
+    }
+});

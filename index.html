@@ -4,25 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="referrer" content="no-referrer">
-    <title>王瑞勇 - 个人作品集</title>
+    <title>王瑞勇 · AI全栈个体 | AIGC视频 · 编程开发 · 商业视觉</title>
     <!-- Meta tags for SEO & Social Sharing -->
     <meta name="description" content="王瑞勇的个人作品集，展示AIGC视频、编程开发、商业视觉等作品。AI武装的超级个体，一个人=策划+开发+设计+创作+运营。">
     <meta name="keywords" content="王瑞勇,AIGC,AI动画,编程开发,商业视觉,个人作品集,AI广告,智能体开发">
     <meta name="author" content="王瑞勇">
     <!-- Open Graph for social sharing -->
     <meta property="og:type" content="website">
-    <meta property="og:title" content="王瑞勇 - AIGC创作者 & AI全栈个体">
+    <meta property="og:title" content="王瑞勇 · AI全栈个体 | AIGC视频 · 编程开发 · 商业视觉">
     <meta property="og:description" content="AI武装的超级个体：OpenClaw × Claude编程 × AIGC创作 × 图片设计 × AI办公">
     <meta property="og:image" content="https://rui.yongok.de5.net/images/profile.jpg">
     <meta property="og:url" content="https://rui.yongok.de5.net/">
     <meta property="og:locale" content="zh_CN">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="王瑞勇 - AIGC创作者 & AI全栈个体">
+    <meta name="twitter:title" content="王瑞勇 · AI全栈个体 | AIGC视频 · 编程开发 · 商业视觉">
     <meta name="twitter:description" content="AI武装的超级个体：OpenClaw × Claude编程 × AIGC创作 × 图片设计 × AI办公">
     <meta name="twitter:image" content="https://rui.yongok.de5.net/images/profile.jpg">
     <link rel="canonical" href="https://rui.yongok.de5.net/">
     <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦞</text></svg>">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%2306b6d4'/><stop offset='1' stop-color='%23a855f7'/></linearGradient></defs><rect width='100' height='100' rx='24' fill='%230f172a'/><g fill='none' stroke='url(%23g)' stroke-width='7' stroke-linecap='round'><path d='M50 26 V54'/><path d='M33 32 C27 44 27 58 33 68'/><path d='M67 32 C73 44 73 58 67 68'/><path d='M42 28 C39 42 39 58 42 70'/><path d='M58 28 C61 42 61 58 58 70'/></g></svg>">
     <!-- Optimize for mobile -->
     <meta name="format-detection" content="telephone=no">
     <meta name="theme-color" content="#0B0E14">
@@ -36,7 +36,7 @@
         "name": "王瑞勇",
         "jobTitle": "AIGC内容创作者",
         "description": "AI武装的超级个体，一个人=策划+开发+设计+创作+运营",
-        "url": "https://wangruiyong.com",
+        "url": "https://rui.yongok.de5.net",
         "email": "381444742@qq.com",
         "telephone": "+86-19833609806",
         "address": {
@@ -53,6 +53,9 @@
     </script>
     <!-- CSS files -->
     <link rel="stylesheet" href="styles.css">
+    <!-- 中文 Web 字体 Noto Sans SC (Google 中国镜像, display=swap 防布局闪烁) -->
+    <link rel="preconnect" href="https://fonts.googleapis.cn" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.cn/css2?family=Noto+Sans+SC:wght@400;500;700;900&display=swap">
     <!-- Font Awesome async loading -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
@@ -126,8 +129,17 @@
     </script>
 </head>
 <body>
-    <!-- 背景网格 -->
+    <!-- 背景层：光晕 / 网格 / 噪点 -->
+    <div class="bg-glow"></div>
     <div class="bg-grid"></div>
+    <div class="bg-grain"></div>
+    <!-- 高级感增强层：浮动光球 / 滚动进度 -->
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div id="scroll-progress"></div>
+    <!-- 鼠标光标拖尾（科技感微光轨迹） -->
+    <div class="cursor-trail" id="cursorTrail"></div>
     <!-- 导航栏 -->
     <nav class="navbar">
         <div class="container">
@@ -137,6 +149,8 @@
             <ul class="nav-links">
                 <li><a href="#home" class="nav-link active">首页</a></li>
                 <li><a href="#works" class="nav-link">作品展示</a></li>
+                <li><a href="#results" class="nav-link">案例效果</a></li>
+                <li><a href="#coding" class="nav-link">编程项目</a></li>
                 <li><a href="#resume" class="nav-link">个人履历</a></li>
                 <li><a href="#contact" class="nav-link">联系我</a></li>
             </ul>
@@ -148,17 +162,28 @@
 
     <!-- 首页 -->
     <section id="home" class="home section visible">
-        <!-- 视频背景 -->
+        <!-- 首屏背景：3D 宇航员场景（three.js, Lusion 风格）为前景，视频作加载兜底 -->
         <div class="video-bg">
-            <div class="video-overlay"></div>
+            <div id="hero3d"></div>
+            <video class="hero-video" autoplay muted loop playsinline preload="metadata"
+                   id="heroVideo">
+                <source src="https://assets.mixkit.co/videos/31771/31771-720.mp4" type="video/mp4">
+                <source src="https://assets.mixkit.co/videos/31510/31510-720.mp4" type="video/mp4">
+                <source src="https://cdn.pixabay.com/video/2018/12/17/20068-307163718_large.mp4" type="video/mp4">
+            </video>
+            <div class="video-overlay hero-readability"></div>
         </div>
         <div class="container">
             <div class="home-content">
                 <div class="banner">
                     <div class="banner-text">
-                        <div class="banner-tag">🔱 AI武装的超级个体</div>
+                        <div class="banner-tag"><i class="fas fa-bolt" aria-hidden="true"></i> AI武装的超级个体</div>
                         <h2>OpenClaw × Claude编程 × AIGC创作 × 图片设计 × AI办公</h2>
                         <h3>一个人 = 策划 + 开发 + 设计 + 创作 + 运营</h3>
+                        <div class="hero-cta">
+                            <a href="#works" class="btn btn-primary"><i class="fas fa-play-circle" aria-hidden="true"></i> 查看作品</a>
+                            <a href="#contact" class="btn btn-ghost"><i class="fas fa-paper-plane" aria-hidden="true"></i> 联系我</a>
+                        </div>
                     </div>
                     <div class="banner-image">
                             <img class="profile-img" 
@@ -176,15 +201,20 @@
                     <span class="tag">图片设计</span>
                     <span class="tag">AI办公</span>
                     <span class="tag">智能体开发</span>
-                    <span class="tag">自媒体运营</span>
-                </div>
+                <span class="tag">自媒体运营</span>
             </div>
         </div>
+    </div>
+        <a href="#works" class="scroll-cue" aria-label="向下滚动查看作品">
+            <span class="scroll-cue-text">向下探索</span>
+            <span class="scroll-cue-mouse"><span class="scroll-cue-wheel"></span></span>
+        </a>
     </section>
 
     <!-- 作品展区 -->
     <section id="works" class="works section">
         <div class="container">
+            <div class="section-eyebrow"><span>01</span> SELECTED WORK</div>
             <h2 class="section-title">作品展示</h2>
             <div class="filter-buttons">
                 <button class="filter-btn active" data-filter="video">AIGC 视频 </button>
@@ -197,7 +227,7 @@
                     <div class="work-card">
                         <div class="work-cover video-cover-wrapper">
                             <img class="video-cover-img" loading="lazy" data-bvid="BV1gpLm6oE6p" src="images/BV1gpLm6oE6p.jpg" alt="为极致而生-奔驰" onerror="this.src='images/profile.jpg';this.onerror=null;">
-                            <div class="video-play-overlay" onclick="playVideo(this)">
+                            <div class="video-play-overlay" onclick="playVideo(this)" role="button" tabindex="0" aria-label="播放视频">
                                 <div class="video-play-btn">
                                     <i class="fas fa-play"></i>
                                 </div>
@@ -216,7 +246,7 @@
                     <div class="work-card">
                         <div class="work-cover video-cover-wrapper">
                             <img class="video-cover-img" loading="lazy" data-bvid="BV1RtV86kEww" src="images/BV1RtV86kEww.jpg" alt="谁说六一只属于孩子" onerror="this.src='images/profile.jpg';this.onerror=null;">
-                            <div class="video-play-overlay" onclick="playVideo(this)">
+                            <div class="video-play-overlay" onclick="playVideo(this)" role="button" tabindex="0" aria-label="播放视频">
                                 <div class="video-play-btn">
                                     <i class="fas fa-play"></i>
                                 </div>
@@ -235,7 +265,7 @@
                     <div class="work-card">
                         <div class="work-cover video-cover-wrapper">
                             <img class="video-cover-img" loading="lazy" data-bvid="BV1ZPJP6REc1" src="images/BV1ZPJP6REc1.jpg" alt="掌灯 PALMLIGHT 封面" onerror="this.src='images/profile.jpg';this.onerror=null;">
-                            <div class="video-play-overlay" onclick="playVideo(this)">
+                            <div class="video-play-overlay" onclick="playVideo(this)" role="button" tabindex="0" aria-label="播放视频">
                                 <div class="video-play-btn">
                                     <i class="fas fa-play"></i>
                                 </div>
@@ -256,7 +286,7 @@
                             <!-- 视频封面图 -->
                             <img class="video-cover-img" loading="lazy" data-bvid="BV1A5wuzQEhN" src="images/BV1A5wuzQEhN.jpg" alt="生活需要仪式感" onerror="this.src='images/profile.jpg';this.onerror=null;">
                             <!-- 播放按钮遮罩 -->
-                            <div class="video-play-overlay" onclick="playVideo(this)">
+                            <div class="video-play-overlay" onclick="playVideo(this)" role="button" tabindex="0" aria-label="播放视频">
                                 <div class="video-play-btn">
                                     <i class="fas fa-play"></i>
                                 </div>
@@ -276,7 +306,7 @@
                     <div class="work-card">
                         <div class="work-cover video-cover-wrapper">
                             <img class="video-cover-img" loading="lazy" data-bvid="BV1jUwkzqEvK" src="images/BV1jUwkzqEvK.jpg" alt="电商广告视频" onerror="this.src='images/profile.jpg';this.onerror=null;">
-                            <div class="video-play-overlay" onclick="playVideo(this)">
+                            <div class="video-play-overlay" onclick="playVideo(this)" role="button" tabindex="0" aria-label="播放视频">
                                 <div class="video-play-btn">
                                     <i class="fas fa-play"></i>
                                 </div>
@@ -295,7 +325,7 @@
                     <div class="work-card">
                         <div class="work-cover video-cover-wrapper">
                             <img class="video-cover-img" loading="lazy" data-bvid="BV17mwkzME79" src="images/BV17mwkzME79.jpg" alt="雄安未来城市畅享" onerror="this.src='images/profile.jpg';this.onerror=null;">
-                            <div class="video-play-overlay" onclick="playVideo(this)">
+                            <div class="video-play-overlay" onclick="playVideo(this)" role="button" tabindex="0" aria-label="播放视频">
                                 <div class="video-play-btn">
                                     <i class="fas fa-play"></i>
                                 </div>
@@ -314,7 +344,7 @@
                     <div class="work-card">
                         <div class="work-cover video-cover-wrapper">
                             <img class="video-cover-img" loading="lazy" data-bvid="BV17mwkzMEQk" src="images/BV17mwkzMEQk.jpg" alt="水韵太极酒AIGC广告宣传片" onerror="this.src='images/profile.jpg';this.onerror=null;">
-                            <div class="video-play-overlay" onclick="playVideo(this)">
+                            <div class="video-play-overlay" onclick="playVideo(this)" role="button" tabindex="0" aria-label="播放视频">
                                 <div class="video-play-btn">
                                     <i class="fas fa-play"></i>
                                 </div>
@@ -333,7 +363,7 @@
                     <div class="work-card">
                         <div class="work-cover video-cover-wrapper">
                             <img class="video-cover-img" loading="lazy" data-bvid="BV1uPwCz4ESG" src="images/BV1uPwCz4ESG.jpg" alt="次世代佩戴：超越界限的引擎" onerror="this.src='images/profile.jpg';this.onerror=null;">
-                            <div class="video-play-overlay" onclick="playVideo(this)">
+                            <div class="video-play-overlay" onclick="playVideo(this)" role="button" tabindex="0" aria-label="播放视频">
                                 <div class="video-play-btn">
                                     <i class="fas fa-play"></i>
                                 </div>
@@ -352,7 +382,7 @@
                     <div class="work-card">
                         <div class="work-cover video-cover-wrapper">
                             <img class="video-cover-img" loading="lazy" data-bvid="BV1UJAczuEwQ" src="images/BV1UJAczuEwQ.jpg" alt="蜜雪冰城AIGC创意广告片" onerror="this.src='images/profile.jpg';this.onerror=null;">
-                            <div class="video-play-overlay" onclick="playVideo(this)">
+                            <div class="video-play-overlay" onclick="playVideo(this)" role="button" tabindex="0" aria-label="播放视频">
                                 <div class="video-play-btn">
                                     <i class="fas fa-play"></i>
                                 </div>
@@ -371,7 +401,7 @@
                     <div class="work-card">
                         <div class="work-cover video-cover-wrapper">
                             <img class="video-cover-img" loading="lazy" data-bvid="BV1id9LBBEBE" src="images/BV1id9LBBEBE.jpg" alt="雄安9周年" onerror="this.src='images/profile.jpg';this.onerror=null;">
-                            <div class="video-play-overlay" onclick="playVideo(this)">
+                            <div class="video-play-overlay" onclick="playVideo(this)" role="button" tabindex="0" aria-label="播放视频">
                                 <div class="video-play-btn">
                                     <i class="fas fa-play"></i>
                                 </div>
@@ -390,7 +420,7 @@
                     <div class="work-card">
                         <div class="work-cover video-cover-wrapper">
                             <img class="video-cover-img" loading="lazy" data-bvid="BV1PvDLBGExy" src="images/BV1PvDLBGExy.jpg" alt="雪山救狐狸" onerror="this.src='images/profile.jpg';this.onerror=null;">
-                            <div class="video-play-overlay" onclick="playVideo(this)">
+                            <div class="video-play-overlay" onclick="playVideo(this)" role="button" tabindex="0" aria-label="播放视频">
                                 <div class="video-play-btn">
                                     <i class="fas fa-play"></i>
                                 </div>
@@ -409,7 +439,7 @@
                     <div class="work-card">
                         <div class="work-cover video-cover-wrapper">
                             <img class="video-cover-img" loading="lazy" data-bvid="BV1xPdpB5EGx" src="images/BV1xPdpB5EGx.jpg" alt="藏锋之沈财神重出江湖" onerror="this.src='images/profile.jpg';this.onerror=null;">
-                            <div class="video-play-overlay" onclick="playVideo(this)">
+                            <div class="video-play-overlay" onclick="playVideo(this)" role="button" tabindex="0" aria-label="播放视频">
                                 <div class="video-play-btn">
                                     <i class="fas fa-play"></i>
                                 </div>
@@ -428,7 +458,7 @@
                     <div class="work-card">
                         <div class="work-cover video-cover-wrapper">
                             <img class="video-cover-img" loading="lazy" data-bvid="BV1CyofB2EeS" src="images/BV1CyofB2EeS.jpg" alt="水韵太极诗仙篇-AIGC广告视频" onerror="this.src='images/profile.jpg';this.onerror=null;">
-                            <div class="video-play-overlay" onclick="playVideo(this)">
+                            <div class="video-play-overlay" onclick="playVideo(this)" role="button" tabindex="0" aria-label="播放视频">
                                 <div class="video-play-btn">
                                     <i class="fas fa-play"></i>
                                 </div>
@@ -447,7 +477,7 @@
                     <div class="work-card">
                         <div class="work-cover video-cover-wrapper">
                             <img class="video-cover-img" loading="lazy" data-bvid="BV1SGZFB4ET6" src="images/BV1SGZFB4ET6.jpg" alt="一条视频看雄安" onerror="this.src='images/profile.jpg';this.onerror=null;">
-                            <div class="video-play-overlay" onclick="playVideo(this)">
+                            <div class="video-play-overlay" onclick="playVideo(this)" role="button" tabindex="0" aria-label="播放视频">
                                 <div class="video-play-btn">
                                     <i class="fas fa-play"></i>
                                 </div>
@@ -466,7 +496,7 @@
                     <div class="work-card">
                         <div class="work-cover video-cover-wrapper">
                             <img class="video-cover-img" loading="lazy" data-bvid="BV1FJ546LEHS" src="images/BV1FJ546LEHS.jpg" alt="来雄安吧，追梦的傻子们" onerror="this.src='images/profile.jpg';this.onerror=null;">
-                            <div class="video-play-overlay" onclick="playVideo(this)">
+                            <div class="video-play-overlay" onclick="playVideo(this)" role="button" tabindex="0" aria-label="播放视频">
                                 <div class="video-play-btn">
                                     <i class="fas fa-play"></i>
                                 </div>
@@ -753,6 +783,7 @@
     <!-- 案例效果板块 -->
     <section id="results" class="results section">
         <div class="container">
+            <div class="section-eyebrow"><span>02</span> CASE RESULTS</div>
             <h2 class="section-title">案例效果</h2>
             <p class="section-subtitle">用数据说话，AI广告视频实战验证</p>
             <div class="results-grid">
@@ -818,6 +849,7 @@
     <section id="coding" class="coding section">
         <div class="container">
             <div class="section-header">
+                <div class="section-eyebrow"><span>03</span> CODING PROJECTS</div>
                 <h2>编程项目展示</h2>
                 <p class="section-subtitle">Python · JavaScript · 小程序 · AI应用开发</p>
             </div>
@@ -903,6 +935,7 @@
     <!-- 个人履历页 -->
     <section id="resume" class="resume section">
         <div class="container">
+            <div class="section-eyebrow"><span>04</span> ABOUT &amp; RESUME</div>
             <h2 class="section-title">个人履历</h2>
             <div class="resume-content">
                 <div class="resume-left">
@@ -913,11 +946,6 @@
                                 <span class="label">姓名：</span>
                                 <span class="value">王瑞勇</span>
                             </div>
-                            <div class="info-item">
-                                <span class="label">性别：</span>
-                                <span class="value">男</span>
-                            </div>
-                           
                             <div class="info-item">
                                 <span class="label">现住城市：</span>
                                 <span class="value">河北省雄安新区容城县</span>
@@ -933,127 +961,47 @@
                         </div>
                     </div>
                     <div class="resume-section">
-                        <h3 class="resume-section-title">Tech Stack</h3>
-                        <div class="skills-list">
-                            <div class="skill-item">
-                                <div class="skill-icon">
-                                    <i class="fas fa-robot"></i>
+                                                <h3 class="resume-section-title">能力矩阵 <span class="en">/ Tech Stack</span></h3>
+                        <div class="capability-groups">
+                            <div class="capability-group">
+                                <h4 class="capability-label">AI 视频与图像 <span class="en">Video &amp; Image</span></h4>
+                                <div class="skills-list">
+                                    <div class="skill-item"><div class="skill-icon"><i class="fas fa-video"></i></div><span class="skill-name">Sora 2</span></div>
+                                    <div class="skill-item"><div class="skill-icon"><i class="fas fa-image"></i></div><span class="skill-name">即梦</span></div>
+                                    <div class="skill-item"><div class="skill-icon"><i class="fas fa-paint-brush"></i></div><span class="skill-name">Nano Banana</span></div>
+                                    <div class="skill-item"><div class="skill-icon"><i class="fas fa-tv"></i></div><span class="skill-name">LibTV</span></div>
+                                    <div class="skill-item"><div class="skill-icon"><i class="fas fa-artstation"></i></div><span class="skill-name">Lovart</span></div>
+                                    <div class="skill-item"><div class="skill-icon"><i class="fas fa-user"></i></div><span class="skill-name">HeyGen</span></div>
+                                    <div class="skill-item"><div class="skill-icon"><i class="fas fa-music"></i></div><span class="skill-name">Suno</span></div>
+                                    <div class="skill-item"><div class="skill-icon"><i class="fas fa-book"></i></div><span class="skill-name">NotebookLM</span></div>
                                 </div>
-                                <span class="skill-name">ChatGPT</span>
                             </div>
-                            <div class="skill-item">
-                                <div class="skill-icon">
-                                    <i class="fas fa-brain"></i>
+                            <div class="capability-group">
+                                <h4 class="capability-label">大模型与对话 <span class="en">LLM</span></h4>
+                                <div class="skills-list">
+                                    <div class="skill-item"><div class="skill-icon"><i class="fas fa-robot"></i></div><span class="skill-name">ChatGPT</span></div>
+                                    <div class="skill-item"><div class="skill-icon"><i class="fas fa-brain"></i></div><span class="skill-name">Gemini</span></div>
+                                    <div class="skill-item"><div class="skill-icon"><i class="fas fa-search"></i></div><span class="skill-name">DeepSeek</span></div>
+                                    <div class="skill-item"><div class="skill-icon"><i class="fas fa-comment-dots"></i></div><span class="skill-name">通义千问</span></div>
+                                    <div class="skill-item"><div class="skill-icon"><i class="fas fa-feather"></i></div><span class="skill-name">Claude</span></div>
+                                    <div class="skill-item"><div class="skill-icon"><i class="fas fa-feather-alt"></i></div><span class="skill-name">Hermes</span></div>
+                                    <div class="skill-item"><div class="skill-icon"><i class="fas fa-code"></i></div><span class="skill-name">Codex</span></div>
                                 </div>
-                                <span class="skill-name">Gemini</span>
                             </div>
-                            <div class="skill-item">
-                                <div class="skill-icon">
-                                    <i class="fas fa-search"></i>
+                            <div class="capability-group">
+                                <h4 class="capability-label">编程与智能体 <span class="en">Code &amp; Agent</span></h4>
+                                <div class="skills-list">
+                                    <div class="skill-item"><div class="skill-icon"><i class="fab fa-python"></i></div><span class="skill-name">Python</span></div>
+                                    <div class="skill-item"><div class="skill-icon lobster-icon"><svg class="lobster-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v5m0 0c-1.5 0-3 1.5-3 4s1 4 3 4 3-1.5 3-4-1.5-4-3-4z"/><path d="M9 9C7 9 6 11 6 13s1 3 2 3m6-7c2 0 3 2 3 4s-1 3-2 3"/><path d="M12 16c0 3 2 4 2 4s-2 1-4 0"/></svg></div><span class="skill-name">OpenClaw</span></div>
                                 </div>
-                                <span class="skill-name">DeepSeek</span>
                             </div>
-                            <div class="skill-item">
-                                <div class="skill-icon">
-                                    <i class="fas fa-comment-dots"></i>
+                            <div class="capability-group">
+                                <h4 class="capability-label">运营与传播 <span class="en">Growth</span></h4>
+                                <div class="skills-list">
+                                    <div class="skill-item"><div class="skill-icon"><i class="fab fa-tiktok"></i></div><span class="skill-name">TikTok</span></div>
+                                    <div class="skill-item"><div class="skill-icon"><i class="fas fa-globe"></i></div><span class="skill-name">跨境电商</span></div>
+                                    <div class="skill-item"><div class="skill-icon"><i class="fas fa-cut"></i></div><span class="skill-name">视频剪辑</span></div>
                                 </div>
-                                <span class="skill-name">通义千问</span>
-                            </div>
-                            <div class="skill-item">
-                                <div class="skill-icon">
-                                    <i class="fas fa-video"></i>
-                                </div>
-                                <span class="skill-name">Sora 2</span>
-                            </div>
-                            <div class="skill-item">
-                                <div class="skill-icon">
-                                    <i class="fas fa-image"></i>
-                                </div>
-                                <span class="skill-name">Seko</span>
-                            </div>
-                            <div class="skill-item">
-                                <div class="skill-icon">
-                                    <i class="fas fa-paint-brush"></i>
-                                </div>
-                                <span class="skill-name">Nano Banana</span>
-                            </div>
-                            <div class="skill-item">
-                                <div class="skill-icon">
-                                    <i class="fas fa-tv"></i>
-                                </div>
-                                <span class="skill-name">LibTV</span>
-                            </div>
-                            <div class="skill-item">
-                                <div class="skill-icon">
-                                    <i class="fas fa-artstation"></i>
-                                </div>
-                                <span class="skill-name">Lovart</span>
-                            </div>
-                            <div class="skill-item">
-                                <div class="skill-icon">
-                                    <i class="fas fa-user"></i>
-                                </div>
-                                <span class="skill-name">HeyGen</span>
-                            </div>
-                            <div class="skill-item">
-                                <div class="skill-icon">
-                                    <i class="fas fa-music"></i>
-                                </div>
-                                <span class="skill-name">Suno</span>
-                            </div>
-                            <div class="skill-item">
-                                <div class="skill-icon">
-                                    <i class="fas fa-book"></i>
-                                </div>
-                                <span class="skill-name">NotebookLM</span>
-                            </div>
-                            <div class="skill-item">
-                                <div class="skill-icon">
-                                    <i class="fas fa-code"></i>
-                                </div>
-                                <span class="skill-name">Codex</span>
-                            </div>
-                            <div class="skill-item">
-                                <div class="skill-icon">
-                                    <i class="fab fa-python"></i>
-                                </div>
-                                <span class="skill-name">Python</span>
-                            </div>
-                            <div class="skill-item">
-                                <div class="skill-icon">
-                                    <i class="fab fa-tiktok"></i>
-                                </div>
-                                <span class="skill-name">TikTok</span>
-                            </div>
-                            <div class="skill-item">
-                                <div class="skill-icon">
-                                    <i class="fas fa-globe"></i>
-                                </div>
-                                <span class="skill-name">跨境电商</span>
-                            </div>
-                            <div class="skill-item">
-                                <div class="skill-icon">
-                                    <i class="fas fa-cut"></i>
-                                </div>
-                                <span class="skill-name">视频剪辑</span>
-                            </div>
-                            <div class="skill-item">
-                                <div class="skill-icon">
-                                    <i class="fas fa-feather"></i>
-                                </div>
-                                <span class="skill-name">Claude</span>
-                            </div>
-                            <div class="skill-item">
-                                <div class="skill-icon">
-                                    <i class="fas fa-feather-alt"></i>
-                                </div>
-                                <span class="skill-name">Hermes</span>
-                            </div>
-                            <div class="skill-item">
-                                <div class="skill-icon lobster-icon">
-                                    <span class="lobster-emoji">🦞</span>
-                                </div>
-                                <span class="skill-name">OpenClaw</span>
                             </div>
                         </div>
                     </div>
@@ -1080,7 +1028,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="resume-section" id="contact">
+                    <div class="resume-section" id="resume-contact">
                         <h3 class="resume-section-title">联系我</h3>
                         <div class="wechat-qr">
                             <img src="images/wechat-qr.png" alt="微信二维码" class="qr-img" loading="lazy">
@@ -1097,13 +1045,13 @@
                                 <div class="timeline-content">
                                     <h4>AIGC 内容生产与全链路工作流搭建</h4>
                                     <p class="position">AI内容创作者</p>
-                                    <p><strong>视觉图像算法多模态算法</strong></p>
                                     <ul class="timeline-list">
                                         <li>OpenClaw武装的AI工作流搭建</li>
                                         <li>AI漫剧全流程导演（66集都市异能题材）</li>
                                         <li>AI广告片制作：水韵太极酒、蜜雪冰城等品牌全案</li>
-                                        <li>公众号"雄安与你同行AI视觉实验室"主理人</li>
-                                        <li>AI工具链：Sora 2 / 可灵 / 即梦 / Seedance + GPT / Gemini / DeepSeek</li>
+                                    <li>公众号"雄安与你同行AI视觉实验室"主理人</li>
+                                    <li>AI广告视频单条最高 <strong>16万+</strong> 播放、涨粉 <strong>400+</strong>（详见「案例效果」）</li>
+                                    <li>AI工具链：Sora 2 / 可灵 / 即梦 / Seedance + GPT / Gemini / DeepSeek</li>
                                     </ul>
                                 </div>
                             </div>
@@ -1129,7 +1077,7 @@
                                         <li>负责新媒体平台（公众号、抖音、小红书等）定位规划</li>
                                         <li>策划图文、短视频等内容形式，优化输出创意方案</li>
                                         <li>完成文案撰写、视频拍摄及后期剪辑，保障内容质量</li>
-                                        <li>执行平台内带节奏内容选题，输送时间与频率</li>
+                                        <li>把控各平台内容选题节奏，规划发布时间与频率</li>
                                     </ul>
                                 </div>
                             </div>
@@ -1176,6 +1124,29 @@
         </div>
     </section>
 
+    <!-- 联系我 -->
+    <section id="contact" class="contact section">
+        <div class="container">
+            <div class="section-eyebrow"><span>05</span> GET IN TOUCH</div>
+            <h2 class="section-title">联系我</h2>
+            <p class="section-subtitle">无论是 AI 视频、网站开发还是商业视觉合作，欢迎随时沟通</p>
+            <div class="contact-card">
+                <div class="contact-qr">
+                    <img src="images/wechat-qr.png" alt="微信二维码" loading="lazy">
+                    <p class="qr-tip">微信扫码，加我好友</p>
+                </div>
+                <div class="contact-lines">
+                    <div class="info-item"><span class="label">电话：</span><span class="value">19833609806</span></div>
+                    <div class="info-item"><span class="label">邮箱：</span><span class="value"><a href="mailto:381444742@qq.com">381444742@qq.com</a></span></div>
+                    <div class="info-item"><span class="label">坐标：</span><span class="value">雄安新区容城县</span></div>
+                </div>
+            </div>
+            <div class="contact-cta">
+                <a href="#home" class="btn btn-primary"><i class="fas fa-arrow-up" aria-hidden="true"></i> 回到首页</a>
+            </div>
+        </div>
+    </section>
+
     <!-- 页脚 -->
     <footer class="footer">
         <div class="container">
@@ -1195,9 +1166,21 @@
         </div>
     </div>
 
-    <button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="返回顶部">
+    <button id="back-to-top" onclick="(window.__lenis?window.__lenis.scrollTo(0):window.scrollTo({top:0,behavior:'smooth'}))" title="返回顶部">
         <i class="fas fa-chevron-up"></i>
     </button>
-    <script src="script.js?v=20260525"></script>
+    <!-- 平滑滚动 Lenis (Pro 技术栈：黄油般丝滑滚动) -->
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
+    <!-- 3D 宇航员首屏场景 (three.js, Lusion 风格；视频作兜底) -->
+    <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+      }
+    }
+    </script>
+    <script type="module" src="hero-astronaut.js"></script>
+    <script src="script.js?v=20260707"></script>
 </body>
 </html>
