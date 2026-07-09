@@ -91,9 +91,8 @@ import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
       astronaut.position.sub(c);
       astronaut.position.y += 0.15;
       scene.add(astronaut);
-      // 模型就位 → 隐藏视频兜底
-      const v = document.querySelector('.hero-video');
-      if (v) v.style.display = 'none';
+      // 视频作为底层背景常驻循环播放（3D 场景透明，宇航员叠加其上）
+      // 不再隐藏视频，解决「闪一下就没了」的问题
     },
     undefined,
     () => { showVideoFallback(); } // 加载失败降级
